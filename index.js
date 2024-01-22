@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.static("public"));
 
 app.get("/",(req,res)=>{
-    res.render("index.ejs");
+    res.render("admin/index.ejs");
 })
 
 app.listen(port,()=>{
