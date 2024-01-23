@@ -142,10 +142,10 @@ img[id="house"]{
     font-weight: bold;
     color: #554d48;
     text-shadow:
-    -1px -1px 0 white,  
-     1px -1px 0 white,
-     -1px 1px 0 white,
-      1px 1px 0 white;
+    -3px -3px 0 white,  
+     3px -3px 0 white,
+     -3px 3px 0 white,
+      3px 3px 0 white;
 }
 
 /* footer */
