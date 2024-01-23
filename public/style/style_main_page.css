@@ -1,0 +1,165 @@
+body{
+    background-color: white;
+}
+
+.main-div{
+    width: 100%;
+    height: 900px;
+    
+    background-color: white;
+
+    display: grid;
+    justify-items: center;
+
+    grid-template-rows: 10% 1fr;
+}
+
+.up-bar{
+    width: 65%;
+    height: 80%;
+
+    background-color: #EEE3CB;
+
+    border-radius: 50px;
+
+    display: grid;
+    grid-template-columns:30% 25%;
+    justify-content: space-between;
+}
+
+.up-right{
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.up-left{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+h1, p, button{
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-weight:500;
+}
+
+button{
+
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    background-color:transparent;
+}
+
+button[id="regis"]{
+    color: white;
+    background-color: #637E76;
+
+    border-radius: 30px;
+}
+
+select{
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    background-color:transparent;
+    font-weight: 100;
+}
+
+
+form[id="filter"]{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+form[id="filter"]>button,form[id="filter"]>div{
+    padding: 0px 10px;
+}
+form[id="filter"]>div>select{
+    width: 80px;
+}
+
+/* down content */
+
+.down-content{
+    width: 70%;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+}
+
+.context-left{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    grid-column: 1/4;
+    grid-row: 1/2;
+
+    z-index: 2;
+
+}
+.context-left>div,.image-right>div{
+    height: 100%;
+    width: 100%;
+}
+.image-right{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    grid-column: 3/5;
+    grid-row: 1/2;
+
+}
+img[id="house"]{
+    margin-top: 100px;
+    margin-right: 100px;
+    
+    border-radius: 20px;
+    
+}
+
+#title-up{
+    font-size: 3em;
+    font-weight: 100;
+    color:#625b56;
+}
+#title-down{
+    font-size: 7em;
+    font-weight: bold;
+    color: #554d48;
+    text-shadow:
+    -1px -1px 0 white,  
+     1px -1px 0 white,
+     -1px 1px 0 white,
+      1px 1px 0 white;
+}
+
+/* footer */
+
+.footer{
+    width: 100%;
+    height: 300px;
+
+    background-color: #625b56;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.footer>p{
+    color:#d7c6ba;
+}
