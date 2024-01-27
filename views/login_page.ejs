@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/style/login_page.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Inter:wght@100&family=Nunito:ital,wght@1,300&family=Open+Sans:wght@300&family=Salsa&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="main-board">
+        <div class="title">
+            <h1>Login</h1>
+        </div>
+        <div class="forming">
+            <form action="/login/send" method="post" class="forming-box">
+                
+                <div class="input-container">
+                <input placeholder="Username" class="input-field" type="text">
+                <label for="input-field" class="input-label">Your username</label>
+                <span class="input-highlight"></span>
+                </div>
+
+                <div class="input-container">
+                    <input placeholder="Password" class="input-field" type="text">
+                    <label for="input-field" class="input-label">Your password</label>
+                    <span class="input-highlight"></span>
+                    </div>
+
+                <button role="button" class="button-name">Login</button>
+            </form>
+        </div>
+    </div>
+    <div class="regis-box">
+        <form action="/regis/customer" method="get" id="regis-form">
+            <button role="button" class="button-name regisbut" formaction="/regis/customer">Register as Customer</button>
+            <button role="button" class="button-name regisbut landlordbut" formaction="/regis/landlord">Register as landlord</button>
+        </form>
+    </div>
+</body>
+</html>

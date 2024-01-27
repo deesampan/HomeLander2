@@ -63,15 +63,23 @@ button[id="regis"]{
 
     border-radius: 30px;
 }
+button[id="search"]{
+    font-weight: bold;
+}
 
 select{
     border: none;
+    border-radius: 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
     background-color:transparent;
     font-weight: 100;
+}
+option{
+    border-radius: 20px;
+    border: none;
 }
 
 
