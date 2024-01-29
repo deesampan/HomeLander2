@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeLander</title>
+    <link rel="stylesheet" href="/style/style_customer_search.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Inter:wght@100&family=Nunito:ital,wght@1,300&family=Open+Sans:wght@300&family=Salsa&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-div">
+        <div class="up-bar">
+            <div class="up-left">
+                <img id="logo" src="/images/office.png" width="35px" height="35px"/>
+                <form action="/" method="get" id="filter">
+                    <button type="submit" formaction="/" id="home">Home</button>
+                    <button type="submit" formaction="/search" id="search">Search</button>
+                    <button type="submit" formaction="/about" id="about">About</button>
+                </form>
+            </div>
+            <div class="up-right right-box">
+                <p>customer_name</p>
+                <img src="/images/circle-user.png" height="25px" width="25px" />
+            </div>
+        </div>
+        <div class="search-content">
+            <div class="search-filter">
+                <h1 class="search-title">Searching</h1>
+                <div class="align-search-filter">
+                    <form action="/search/filter" method="post" class="formsearchfilter">
+                        <nav role="navigation" class="primary-navigation">
+                            <ul>
+                            <li><a href="#">Type &dtrif;</a>
+                                <ul class="dropdown">
+                                <li><a href="#"><button type="submit">Townhome</button></a></li>
+                                <li><a href="#"><button type="submit">Tiny</button></a></li>
+                                <li><a href="#"><button type="submit">Apartment</button></a></li>
+                                <li><a href="#"><button type="submit">Big House</button></a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </nav>
+                    </form>
+                    <div onKeyPress="return enterFunction(event)">
+                        <form class="wave-group" action="/search-filter-name" method="get">
+                            <input required="" type="text" class="input">
+                            <span class="bar"></span>
+                            <label class="label">
+                            <span class="label-char" style="--index: 0">S</span>
+                            <span class="label-char" style="--index: 1">e</span>
+                            <span class="label-char" style="--index: 2">a</span>
+                            <span class="label-char" style="--index: 3">r</span>
+                            <span class="label-char" style="--index: 3">c</span>
+                            <span class="label-char" style="--index: 3">h</span>
+                            </label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="content-main">
+                <div class="search-filter-side">
+                    <form class="main" action="/filter-side" method="get"> 
+                        <div class="gfg"> 
+                            <p>Filter</p> 
+                        </div> 
+                        <div class="custom-wrapper"> 
+                  
+                            <div class="header"> 
+                                <h2 class="projtitle"> 
+                                      Price Range
+                                  </h2> 
+                            </div> 
+                  
+                            <div class="price-input-container"> 
+                                <div class="price-input"> 
+                                    <div class="price-field"> 
+                                        <span>Min-Price</span> 
+                                        <input type="number" 
+                                               class="min-input" 
+                                               value="0"> 
+                                    </div> 
+                                    <div class="price-field"> 
+                                        <span>Max-Price</span> 
+                                        <input type="number" 
+                                               class="max-input" 
+                                               value="1000000"> 
+                                    </div> 
+                                </div> 
+                                <div class="slider-container"> 
+                                    <div class="price-slider"> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                  
+                            <!-- Slider -->
+                            <div class="range-input"> 
+                                <input type="range" 
+                                       class="min-range" 
+                                       min="0" 
+                                       max="1000000" 
+                                       value="0" 
+                                       step="1"> 
+                                <input type="range" 
+                                       class="max-range" 
+                                       min="0" 
+                                       max="1000000" 
+                                       value="1000000" 
+                                       step="1"> 
+                            </div> 
+                        </div> 
+                        <button class="filter-but"> Button
+                        </button>
+                    </form> 
+
+                </div>
+                <div class="content-list">
+                    <div class="card">
+                        <div class="card-details">
+                          <p class="text-title">Card title</p>
+                          <p class="text-body">Here are the details of the card</p>
+                        </div>
+                        <form action="/items/id" method="get"><button class="card-button">More info</button></form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rangevalue =  
+    document.querySelector(".slider-container .price-slider"); 
+const rangeInputvalue =  
+    document.querySelectorAll(".range-input input"); 
+  
+// Set the price gap 
+let priceGap = 0; 
+  
+// Adding event listners to price input elements 
+const priceInputvalue =  
+    document.querySelectorAll(".price-input input"); 
+for (let i = 0; i < priceInputvalue.length; i++) { 
+    priceInputvalue[i].addEventListener("input", e => { 
+  
+        // Parse min and max values of the range input 
+        let minp = parseInt(priceInputvalue[0].value); 
+        let maxp = parseInt(priceInputvalue[1].value); 
+        let diff = maxp - minp 
+  
+        if (minp < 0) { 
+            alert("minimum price cannot be less than 0"); 
+            priceInputvalue[0].value = 0; 
+            minp = 0; 
+        } 
+  
+        // Validate the input values 
+        if (maxp > 1000000) { 
+            alert("maximum price cannot be greater than 10000"); 
+            priceInputvalue[1].value = 1000000; 
+            maxp = 1000000; 
+        } 
+  
+        if (minp > maxp - priceGap) { 
+            priceInputvalue[0].value = maxp - priceGap; 
+            minp = maxp - priceGap; 
+  
+            if (minp < 0) { 
+                priceInputvalue[0].value = 0; 
+                minp = 0; 
+            } 
+        } 
+  
+        // Check if the price gap is met  
+        // and max price is within the range 
+        if (diff >= priceGap && maxp <= rangeInputvalue[1].max) { 
+            if (e.target.className === "min-input") { 
+                rangeInputvalue[0].value = minp; 
+                let value1 = rangeInputvalue[0].max; 
+                rangevalue.style.left = `${(minp / value1) * 100}%`; 
+            } 
+            else { 
+                rangeInputvalue[1].value = maxp; 
+                let value2 = rangeInputvalue[1].max; 
+                rangevalue.style.right =  
+                    `${100 - (maxp / value2) * 100}%`; 
+            } 
+        } 
+    }); 
+  
+    // Add event listeners to range input elements 
+    for (let i = 0; i < rangeInputvalue.length; i++) { 
+        rangeInputvalue[i].addEventListener("input", e => { 
+            let minVal =  
+                parseInt(rangeInputvalue[0].value); 
+            let maxVal =  
+                parseInt(rangeInputvalue[1].value); 
+  
+            let diff = maxVal - minVal 
+              
+            // Check if the price gap is exceeded 
+            if (diff < priceGap) { 
+              
+                // Check if the input is the min range input 
+                if (e.target.className === "min-range") { 
+                    rangeInputvalue[0].value = maxVal - priceGap; 
+                } 
+                else { 
+                    rangeInputvalue[1].value = minVal + priceGap; 
+                } 
+            } 
+            else { 
+              
+                // Update price inputs and range progress 
+                priceInputvalue[0].value = minVal; 
+                priceInputvalue[1].value = maxVal; 
+                rangevalue.style.left = 
+                    `${(minVal / rangeInputvalue[0].max) * 100}%`; 
+                rangevalue.style.right = 
+                    `${100 - (maxVal / rangeInputvalue[1].max) * 100}%`; 
+            } 
+        }); 
+    } 
+}
+function enterFunction(e) {
+    if((e && e.keyCode == 13) || e == 0) {
+      document.forms.form01.submit("/kuy");
+      document.forms.form01.fname.value = ""; // could be form01.reset as well
+    }
+ }
+    </script> 
+</body>
+</html>

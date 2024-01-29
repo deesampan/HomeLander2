@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.static("public"));
 
 app.get("/",(req,res)=>{
-    res.render("main_page.ejs");
+    res.render("customer/customer_search.ejs");
 })
 
 app.get("/login",(req,res)=>{
