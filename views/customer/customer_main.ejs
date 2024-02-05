@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/style/style.css">
+    <title>HomeLander</title>
+    <link rel="stylesheet" href="/style/customer_css/style_main_page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Inter:wght@100&family=Nunito:ital,wght@1,300&family=Open+Sans:wght@300&family=Salsa&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <div class="main-div">
+        <div class="up-bar">
+            <div class="up-left">
+                <img id="logo" src="/images/office.png" width="35px" height="35px"/>
+                <form action="/" method="get" id="filter">
+                    <button type="submit" formaction="/" id="home">Home</button>
+                    <button type="submit" formaction="/search" id="search">Search</button>
+                    <button type="submit" formaction="/about" id="about">About</button>
+                </form>
+            </div>
+            <div class="up-right right-box">
+                <p>customer_name</p>
+                <img src="/images/circle-user.png" height="25px" width="25px" />
+            </div>
+        </div>
+        <div class="down-content">
+            <div class="context-left">
+                <div>
+                    <h1 id="title-up">
+                        <br><br>
+                        Time to meet your
+                    </h1>
+                    <br>
+                    <h1 id="title-down">
+                        N E W H O M E
+                    </h1>
+                </div>
+            </div>
+            <div class="image-right">
+                <div><img src="/images/hgouse.jpg" width="600px" height="400px" id="house"/></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Home Lander | Database System Project</p>
+    </div>
 </body>
 </html>

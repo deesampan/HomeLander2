@@ -33,6 +33,12 @@ body{
     justify-content: center;
     align-items: center;
 }
+.right-box{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
 
 .up-left{
     display: grid;
@@ -63,15 +69,23 @@ button[id="regis"]{
 
     border-radius: 30px;
 }
+button[id="search"]{
+    font-weight: bold;
+}
 
 select{
     border: none;
+    border-radius: 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
     background-color:transparent;
     font-weight: 100;
+}
+option{
+    border-radius: 20px;
+    border: none;
 }
 
 
@@ -162,4 +176,10 @@ img[id="house"]{
 }
 .footer>p{
     color:#d7c6ba;
+}
+
+.search-content{
+    width: 100%;
+    height: 100%;
+    background-color: #625b56;
 }
