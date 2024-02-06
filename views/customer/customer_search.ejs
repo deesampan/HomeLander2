@@ -116,13 +116,15 @@
 
                 </div>
                 <div class="content-list">
-                    <div class="card">
-                        <div class="card-details">
-                          <p class="text-title">Card title</p>
-                          <p class="text-body">Here are the details of the card</p>
+                    <% for(var i = 0;i< 10;i++) { %>
+                        <div class="card">
+                            <div class="card-details">
+                            <p class="text-title">Card title</p>
+                            <p class="text-body">Here are the details of the card</p>
+                            </div>
+                            <form action="/items/id" method="get"><button class="card-button">More info</button></form>
                         </div>
-                        <form action="/items/id" method="get"><button class="card-button">More info</button></form>
-                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -130,9 +132,9 @@
 
     <script>
         const rangevalue =  
-    document.querySelector(".slider-container .price-slider"); 
-const rangeInputvalue =  
-    document.querySelectorAll(".range-input input"); 
+        document.querySelector(".slider-container .price-slider"); 
+        const rangeInputvalue =  
+        document.querySelectorAll(".range-input input"); 
   
 // Set the price gap 
 let priceGap = 0; 
