@@ -2,17 +2,33 @@ body{
     background-color: white;
 }
 
+.logo{
+  top: 50px;
+  
+  width: 50px;
+
+  left: 50%;
+  transform: translate(-50%,0%);
+  position: relative;
+
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
 .main-board{
     width: 500px;
     height: 600px;
 
-    background-color: #EEE3CB;
+    /* background-color: #EEE3CB; */
+    /* border-color: #36395A; */
+    border: 2px solid #707286;
     border-radius: 20px;
     
     left: 50%;
     transform: translate(-50%,0%);
 
-    margin-top: 8%;
+    margin-top: 100px;
 
     position: relative;
     
@@ -20,7 +36,7 @@ body{
     justify-items: center;
     align-items: center;
     grid-template-rows: 1fr 70%;
-    grid-gap: 10px;
+    /* grid-gap: 10px; */
 }
 
 .title{
@@ -35,7 +51,7 @@ body{
     width: 80%;
     height: 80%;
 
-    background-color: #f8f2e5;
+    /* background-color: #f8f2e5; */
     border-radius: 20px;
 }
 h1{
@@ -53,12 +69,13 @@ h1{
   .input-field {
     display: block;
     width: 90%;
-    padding: 10px;
     font-size: 16px;
     border: none;
     border-bottom: 2px solid #ccc;
     outline: none;
-    background-color: transparent;
+    background-color: rgb(232, 232, 232);
+    padding: 15px;
+    border-radius: 20px;
   }
   
   /* Input label */

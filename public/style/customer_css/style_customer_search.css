@@ -252,6 +252,8 @@ img[id="house"]{
     border: 2px solid #a39888;
     transition: 0.5s ease-out;
     overflow: visible;
+
+    z-index: 0;
    }
    
    .card-details {
@@ -403,6 +405,7 @@ nav {
         background-color: #e5ddd6;
         border-radius: 20px;
       ul li {
+        z-index: 2;
         list-style: none;
         margin: 0 auto;
         border-left: 2px solid #BBAB8C;

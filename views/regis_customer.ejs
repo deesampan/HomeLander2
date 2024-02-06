@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/style/login_page.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,9 @@
     
 </head>
 <body>
+    <div class="logo">
+        <img src="images/office.png" width="50px">
+    </div>
     <div class="main-board">
         <div class="title">
             <h1>Register | Customer</h1>
@@ -19,25 +22,25 @@
             <form action="/regis/customer/send" method="post" class="forming-box">
                 
                 <div class="input-container">
-                <input placeholder="Username" class="input-field" type="text">
+                <input placeholder="Username" class="input-field" type="text" name="username">
                 <label for="input-field" class="input-label">Your username</label>
                 <span class="input-highlight"></span>
                 </div>
 
                 <div class="input-container">
-                    <input placeholder="Password" class="input-field" type="text">
+                    <input placeholder="Password" class="input-field" type="password" name="password1">
                     <label for="input-field" class="input-label">Your password</label>
                     <span class="input-highlight"></span>
                     </div>
                     <div class="input-container">
-                        <input placeholder="Password" class="input-field" type="text">
+                        <input placeholder="Password" class="input-field" type="password" name="password2">
                         <label for="input-field" class="input-label">Your password</label>
                         <span class="input-highlight"></span>
                         </div>
                         
                         
 
-                <button role="button" class="button-name">Register</button>
+                <button type="submit" role="button" class="button-name">Register</button>
             </form>
         </div>
     </div>
