@@ -263,6 +263,9 @@ img[id="house"]{
     display: grid;
     place-content: center;
    }
+   .card-details>img{
+    border-radius: 20px;
+   }
    
    .card-button {
     transform: translate(-50%, 125%);
