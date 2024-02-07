@@ -72,7 +72,7 @@ app.post("/login/send",async (req,res)=>{
             
             if(result){
                 user_now = username;
-                res.render("customer/customer_main.ejs",{customer_name: username});
+                res.redirect("/home_customer")
             }else{
                 console.log("Incorrect password");
                 res.redirect("/login");
@@ -82,6 +82,10 @@ app.post("/login/send",async (req,res)=>{
         console.log(err);
     }
 });
+
+app.get("/home_customer",(req,res)=>{
+    res.render("customer/customer_main.ejs",{customer_name: user_now});
+})
 
 app.get("/search",(req,res)=>{
     res.render("customer/customer_search.ejs",{customer_name: user_now});
