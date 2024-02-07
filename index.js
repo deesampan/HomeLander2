@@ -21,6 +21,9 @@ const db = new pg.Client({
 });
 db.connect(); //for connecting database with your postgresql
 
+//checking which user is active now
+let user_now = "name_of_user";
+
 
 // app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static("public"));
@@ -68,6 +71,7 @@ app.post("/login/send",async (req,res)=>{
             if(err) console.log(err);
             
             if(result){
+                user_now = username;
                 res.render("customer/customer_main.ejs",{customer_name: username});
             }else{
                 console.log("Incorrect password");
@@ -80,7 +84,7 @@ app.post("/login/send",async (req,res)=>{
 });
 
 app.get("/search",(req,res)=>{
-    res.render("customer/customer_search.ejs");
+    res.render("customer/customer_search.ejs",{customer_name: user_now});
 })
 
 app.get("/items/id",(req,res)=>{
