@@ -34,8 +34,10 @@ body{
     align-items: center;
 }
 .right-box{
+    width: 80%;
+
     display: grid;
-    justify-content: center;
+    justify-items: flex-end;
     align-items: center;
     grid-template-columns: 1fr 1fr;
 }
