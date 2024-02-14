@@ -19,7 +19,7 @@ const db = new pg.Client({
     database:"homelander", //have to be match with same name
     host:"localhost"
 });
-db.connect(); //for connecting database with your postgresql
+// db.connect(); //for connecting database with your postgresql
 
 //checking which user is active now
 let user_now = "name_of_user";
@@ -48,6 +48,15 @@ app.get("/regis/landlord",(req,res)=>{
 app.get("/landlord",(req,res)=>{
     res.render("landlord/landlord_main.ejs");
 });
+
+app.get("/land",(req,res)=>{
+    res.render("landlord/landlord_land.ejs");
+});
+
+app.get("/land/id",(req,res)=>{
+    res.render("landlord/landlord_item.ejs");
+});
+
 app.post("/regis/customer/send",async (req,res)=>{
     const pass1 = req.body.password1;
     const pass2 = req.body.password2;
@@ -101,3 +110,4 @@ app.get("/items/id",(req,res)=>{
 app.listen(port,()=>{
     console.log("server is work!");
 });
+
