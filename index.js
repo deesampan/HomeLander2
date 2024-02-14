@@ -13,10 +13,10 @@ app.use(BodyParser.urlencoded({extended:false}));
 
 //connecting database user 
 const db = new pg.Client({
-    port:5432,
-    user:"postgres",
-    password:"tonton123", //fill with your damn password
-    database:"homelander", //have to be match with same name
+    port:process.env.PORT,
+    user:process.env.USER,
+    password:process.env.PASSWORD, //fill with your damn password
+    database:process.env.DATABASE, //have to be match with same name
     host:"localhost"
 });
 db.connect(); //for connecting database with your postgresql
@@ -50,12 +50,9 @@ app.post("/regis/customer/send",async (req,res)=>{
     const pass2 = req.body.password2;
     
     
-    if(pass1 === pass2){
-        bcrypt.hash(pass1,saltpower,async (err,hash)=>{
-            if(err) console.log (err);
-            await db.query("INSERT INTO users (name,password,role) VALUES ($1,$2,$3)",[req.body.username,hash,"customer"]);
-            res.redirect("/login");
-        })
+    if(pass1 == pass2){
+        await db.query("INSERT INTO users (name,password,role) VALUES ($1,$2,$3)",[req.body.username,pass1,"customer"]);
+        res.redirect("/login");
     }else{
         res.redirect("/regis/customer");
     }
@@ -67,21 +64,18 @@ app.post("/login/send",async (req,res)=>{
     try{
         const result = await db.query("SELECT * FROM users WHERE name = ($1)",[username]);
         const data = result.rows[0];
-        bcrypt.compare(password,data.password,(err,result)=>{
-            if(err) console.log(err);
-            
-            if(result){
-                user_now = username;
-                res.redirect("/home_customer")
-            }else{
-                console.log("Incorrect password");
-                res.redirect("/login");
-            }
-        })
+        if(data.password === password){
+            user_now = data.name;
+            res.redirect("/home_customer")
+        }else{
+            console.log("Incorrect password");
+            res.redirect("/login");
+        }
     }catch(err){
         console.log(err);
     }
 });
+
 
 app.get("/home_customer",(req,res)=>{
     res.render("customer/customer_main.ejs",{customer_name: user_now});
