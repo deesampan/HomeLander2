@@ -17,7 +17,7 @@ const db = new pg.Client({
     user:process.env.USER,
     password:process.env.PASSWORD, //fill with your damn password
     database:process.env.DATABASE, //have to be match with same name
-    host:"localhost"
+    host:process.env.HOST,
 });
 // db.connect(); //for connecting database with your postgresql
 
