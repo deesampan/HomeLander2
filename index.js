@@ -18,9 +18,9 @@ const db = new pg.Client({
     user:process.env.USER,
     password:process.env.PASSWORD, //fill with your damn password
     database:process.env.DATABASE, //have to be match with same name
-    host:"localhost"
+    host:process.env.HOST,
 });
-db.connect(); //for connecting database with your postgresql
+// db.connect(); //for connecting database with your postgresql
 
 //checking which user is active now
 let user_now = "name_of_user";
@@ -44,6 +44,18 @@ app.get("/regis/customer",(req,res)=>{
 
 app.get("/regis/landlord",(req,res)=>{
     res.render("regis_landlord.ejs");
+});
+
+app.get("/landlord",(req,res)=>{
+    res.render("landlord/landlord_main.ejs");
+});
+
+app.get("/land",(req,res)=>{
+    res.render("landlord/landlord_land.ejs");
+});
+
+app.get("/land/id",(req,res)=>{
+    res.render("landlord/landlord_item.ejs");
 });
 
 app.post("/regis/customer/send",async (req,res)=>{
@@ -93,3 +105,4 @@ app.get("/items/id",(req,res)=>{
 app.listen(port,()=>{
     console.log("server is work!");
 });
+
