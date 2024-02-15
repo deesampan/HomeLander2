@@ -23,7 +23,7 @@
     border-radius: 50px;
 
     display: grid;
-    grid-template-columns:30% 25%;
+    grid-template-columns:50% 25%;
     justify-content: space-between;
 }
 
@@ -42,7 +42,7 @@
 
 .up-left{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 5fr;
     justify-items: center;
     align-items: center;
 }
@@ -66,4 +66,23 @@ button[id="regis"]{
 }
 button[id="search"]{
     font-weight: bold;
+}
+
+.left-side{
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-weight:500;
+}
+form[id="filter"]{
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr ;
+    justify-content: center;
+    align-items: center;
+}
+
+form[id="filter"]>button,form[id="filter"]>div{
+    padding: 0px 10px;
+}
+form[id="filter"]>div>select{
+    width: 80px;
 }
