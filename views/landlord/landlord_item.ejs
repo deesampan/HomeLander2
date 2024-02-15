@@ -30,14 +30,88 @@
                     <button type="submit" formaction="/about" id="about">About</button> -->
                 </form>
             </div>
-            <div class="up-right right-box">
+            <div class="right-box">
                 <p>
-                    <%= locals.customer_name %>
+                    username<%= locals.customer_name %>
                 </p>
                 <img src="/images/circle-user.png" height="25px" width="25px" />
             </div>
         </div>
-        <img src="/images/hgouse.jpg" alt="">
+        <form class="creator" action="/land" method="post">
+            <div class="left-creator">
+                <img src="/images/hgouse.jpg" width="90%">
+                <div class="status">
+                    <h1>Status</h1>
+                    <div class="container">
+                        <div class="tabs">
+                            <input type="radio" id="radio-2" name="tabs" value="available">
+                            <label class="tab" for="radio-2">Available🟢</label>
+                            <input type="radio" id="radio-3" name="tabs" value="unavailable"> 
+                            <label class="tab" for="radio-3">Unavailable🔴</label>
+                            <span class="glider"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-creator">
+                <div class="detail">
+                    <div class="inputer"><h1 style="display:inline-block">Land's name :</h1>
+                        <div style="display:inline-block" class="input-container">
+                            <input type="text" id="input" required="">
+                            <label for="input" class="label">Enter your land's name</label>
+                            <div class="underline"></div>
+                        </div><br />
+    
+    
+                        <h1 style="display:inline-block">Land's type :</h1>
+                        <div class="custom-select" style="display:inline-block; width:200px;">
+                            <select>
+                              <option value="0" selected hidden disabled >Select car:</option>
+                              <option value="1">Audi</option>
+                              <option value="2">BMW</option>
+                              <option value="3">Citroen</option>
+                              <option value="4">Ford</option>
+                              <option value="5">Honda</option>
+                              <option value="6">Jaguar</option>
+                              <option value="7">Land Rover</option>
+                              <option value="8">Mercedes</option>
+                              <option value="9">Mini</option>
+                              <option value="10">Nissan</option>
+                              <option value="11">Toyota</option>
+                              <option value="12">Volvo</option>
+                            </select>
+                        </div><br />
+    
+                        <h1 style="display:inline-block">Starter price-input :</h1>
+                        <div style="display:inline-block" class="input-container">
+                            <input type="text" id="input" required="">
+                            <label for="input" class="label">Enter start price</label>
+                            <div class="underline"></div>
+                        </div><br />
+    
+                        <h1 style="display:inline-block">Phone-Contact :</h1>
+                        <div style="display:inline-block" class="input-container">
+                            <input type="text" id="input" required="">
+                            <label for="input" class="label">Enter phone-contact</label>
+                            <div class="underline"></div>
+                        </div><br />
+    
+                        <h1 style="display:inline-block">Description :</h1>
+                        <div style="display:inline-block" class="input-container">
+                            <input type="text" id="input" required="">
+                            <label for="input" class="label">Enter description</label>
+                            <div class="underline"></div>
+                        </div><br />
+                    </div>
+                    <div class="submiter">
+                        <button class="button type1">
+                            <span class="btn-txt">Create!</span>
+                          </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
