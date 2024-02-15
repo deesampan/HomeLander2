@@ -4,6 +4,7 @@ import BodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcrypt";
 import path from "path";
+import 'dotenv/config';
 
 const app = express()
 const port = 3000;
