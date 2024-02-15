@@ -2,6 +2,15 @@ body{
     background-color: white;
 }
 
+.new_but{
+  width: 130px;
+  height: 60px;
+  position:fixed;
+
+  left: 80%;
+  bottom: 10%
+}
+
 .main-div{
     width: 100%;
     height: fit-content;
@@ -680,9 +689,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .new {
-    width: 10%;
+    width: 100%;
     min-width: 100px;
-    height: 8%;
+    height: 100%;
     padding: 8px;
     border-radius: 40px;
     border: 2.5px solid #E0E1E4;
