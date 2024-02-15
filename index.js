@@ -54,7 +54,7 @@ app.get("/land",(req,res)=>{
     res.render("landlord/landlord_land.ejs");
 });
 
-app.get("/land/:id",(req,res)=>{
+app.get("/land/create",(req,res)=>{
     res.render("landlord/landlord_item.ejs");
 });
 
