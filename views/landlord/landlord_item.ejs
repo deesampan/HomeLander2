@@ -38,9 +38,9 @@
                     <h1>Status</h1>
                     <div class="container">
                         <div class="tabs">
-                            <input type="radio" id="radio-2" name="tabs" value="available">
+                            <input type="radio" id="radio-2" name="status" value="available">
                             <label class="tab" for="radio-2">Available🟢</label>
-                            <input type="radio" id="radio-3" name="tabs" value="unavailable"> 
+                            <input type="radio" id="radio-3" name="status" value="unavailable"> 
                             <label class="tab" for="radio-3">Unavailable🔴</label>
                             <span class="glider"></span>
                         </div>
@@ -51,7 +51,7 @@
                 <div class="detail">
                     <div class="inputer"><h1 style="display:inline-block">Land's name :</h1>
                         <div style="display:inline-block" class="input-container">
-                            <input type="text" id="input" required="">
+                            <input type="text" id="input" required="" name="land_name">
                             <label for="input" class="label">Enter your land's name</label>
                             <div class="underline"></div>
                         </div><br />
@@ -59,40 +59,32 @@
     
                         <h1 style="display:inline-block">Land's type :</h1>
                         <div class="custom-select" style="display:inline-block; width:200px;">
-                            <select>
-                              <option value="0" selected hidden disabled >Select car:</option>
-                              <option value="1">Audi</option>
-                              <option value="2">BMW</option>
-                              <option value="3">Citroen</option>
-                              <option value="4">Ford</option>
-                              <option value="5">Honda</option>
-                              <option value="6">Jaguar</option>
-                              <option value="7">Land Rover</option>
-                              <option value="8">Mercedes</option>
-                              <option value="9">Mini</option>
-                              <option value="10">Nissan</option>
-                              <option value="11">Toyota</option>
-                              <option value="12">Volvo</option>
+                            <select name="land_type">
+                              <option value="0" selected hidden disabled >Select Type:</option>
+                              <option value="1">Townhouse</option>
+                              <option value="2">Tiny</option>
+                              <option value="3">Apartment</option>
+                              <option value="4">Single house</option>
                             </select>
                         </div><br />
     
                         <h1 style="display:inline-block">Starter price-input :</h1>
                         <div style="display:inline-block" class="input-container">
-                            <input type="text" id="input" required="">
+                            <input type="text" id="input" required="" name="land_price" >
                             <label for="input" class="label">Enter start price</label>
                             <div class="underline"></div>
                         </div><br />
     
                         <h1 style="display:inline-block">Phone-Contact :</h1>
                         <div style="display:inline-block" class="input-container">
-                            <input type="text" id="input" required="">
+                            <input type="text" id="input" required="" name="land_phone" >
                             <label for="input" class="label">Enter phone-contact</label>
                             <div class="underline"></div>
                         </div><br />
     
                         <h1 style="display:inline-block">Description :</h1>
                         <div style="display:inline-block" class="input-container">
-                            <input type="text" id="input" required="">
+                            <input type="text" id="input" required="" name="land_des" >
                             <label for="input" class="label">Enter description</label>
                             <div class="underline"></div>
                         </div><br />
@@ -104,7 +96,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 
