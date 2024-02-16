@@ -4,20 +4,21 @@ body{
 
 .main-div{
     width: 100%;
-    height: fit-content;
+    height: 900px;
     
     background-color: white;
 
     display: grid;
     justify-items: center;
 
-    grid-template-rows: 100px 1fr;
-    grid-gap: 20px;
+    grid-template-rows: 10% 1fr;
 }
+
+/* Nav bar */
 
 .up-bar{
     width: 65%;
-    height: 100px;
+    height: 80%;
 
     background-color: #EEE3CB;
 
@@ -29,11 +30,11 @@ body{
 }
 
 .up-right{
-
     display: grid;
     justify-content: center;
     align-items: center;
 }
+
 .right-box{
     display: grid;
     justify-content: center;
@@ -47,14 +48,14 @@ body{
     justify-items: center;
     align-items: center;
 }
-h1, p, button{
+
+h1, p, button, h2{
     font-family: 'Open Sans', sans-serif;
     color: black;
     font-weight:500;
 }
 
 button{
-
     border: none;
     padding: 16px 32px;
     text-align: center;
@@ -64,31 +65,10 @@ button{
     background-color:transparent;
 }
 
-button[id="regis"]{
-    color: white;
-    background-color: #637E76;
-
-    border-radius: 30px;
-}
-button[id="search"]{
-    font-weight: bold;
-}
-
-select{
-    border: none;
-    border-radius: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    background-color:transparent;
-    font-weight: 100;
-}
 option{
     border-radius: 20px;
     border: none;
 }
-
 
 form[id="filter"]{
     display: grid;
@@ -104,80 +84,6 @@ form[id="filter"]>div>select{
     width: 80px;
 }
 
-/* down content */
-
-.down-content{
-    width: 70%;
-    
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-gap: 10px;
-}
-
-.context-left{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-
-    grid-column: 1/4;
-    grid-row: 1/2;
-
-    z-index: 2;
-
-}
-.context-left>div,.image-right>div{
-    height: 100%;
-    width: 100%;
-}
-.image-right{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-
-    grid-column: 3/5;
-    grid-row: 1/2;
-
-}
-img[id="house"]{
-    margin-top: 100px;
-    margin-right: 100px;
-    
-    border-radius: 20px;
-    
-}
-
-#title-up{
-    font-size: 3em;
-    font-weight: 100;
-    color:#625b56;
-}
-#title-down{
-    font-size: 7em;
-    font-weight: bold;
-    color: #554d48;
-    text-shadow:
-    -3px -3px 0 white,  
-     3px -3px 0 white,
-     -3px 3px 0 white,
-      3px 3px 0 white;
-}
-
-/* footer */
-
-.footer{
-    width: 100%;
-    height: 300px;
-
-    background-color: #625b56;
-
-    display: grid;
-    justify-content: center;
-    align-items: center;
-}
-.footer>p{
-    color:#d7c6ba;
-}
 
 .search-content{
     width: 100%;
@@ -675,4 +581,28 @@ input[type="range"]::-webkit-slider-thumb {
 
 .filter-but:active {
   transform: scale(0.9);
+}
+
+
+
+/* footer */
+
+.footer{
+    margin-top: 40%;
+    width: 100%;
+    height: 300px;
+
+    background-color: #625b56;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer>p{
+    color:#d7c6ba;
+}
+
+button{
+    cursor: pointer; 
 }
