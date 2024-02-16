@@ -90,6 +90,13 @@ app.post("/login/send",async (req,res)=>{
 });
 
 
+//landlord
+app.post("/land",(req,res)=>{
+    console.log(req.body);
+    res.render("landlord/landlord_land.ejs")
+})
+
+
 app.get("/home_customer",(req,res)=>{
     res.render("customer/customer_main.ejs",{customer_name: user_now});
 })
