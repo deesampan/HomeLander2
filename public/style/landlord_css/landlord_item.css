@@ -175,6 +175,7 @@ h1{
     display: grid;
     justify-content: flex-end;
     align-items: center;
+    margin-left: 100%;
 }
 
 .input-container {
