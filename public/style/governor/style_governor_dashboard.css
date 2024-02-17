@@ -1,0 +1,53 @@
+.header {grid-area: header;}
+.transaction_graph {grid-area: tg;}
+.user_graph {grid-area: ug;}
+.daily_transaction {
+    grid-area: dt;
+    background-color: #F2ECE2;
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 5px;
+}
+.recent_transaction {
+    grid-area: rt;
+    background-color: #F2ECE2;
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.daily_user {
+    grid-area: du;
+    background-color: #F2ECE2;
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 5px;
+}
+.total_user {
+    grid-area: tu;
+    background-color: #F2ECE2;
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.grid_container{
+    display: grid;
+    grid-template-areas: 
+    "header header header header"
+    "tg tg dt rt"
+    "ug ug du tu";
+    grid-gap: 10px;
+    /* padding: 10px; */
+}
+
+.border {
+    background-color: #F2ECE2;
+    overflow: hidden;
+    /* display : grid;
+    justify-items :center;
+    align-items : center;
+    grid-templates-column: 1fr 1fr 1fr 1fr 1fr; */
+    border-radius: 25px;
+    padding: 5px;
+}
