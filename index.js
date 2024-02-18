@@ -20,7 +20,7 @@ const db = new pg.Client({
     database:process.env.DATABASE, //have to be match with same name
     host:process.env.HOST,
 });
-// db.connect(); //for connecting database with your postgresql
+db.connect(); //for connecting database with your postgresql
 
 //checking which user is active now
 let user_now = "name_of_user";
@@ -31,7 +31,7 @@ app.use(express.static("public"));
 
 //login backend
 app.get("/",(req,res)=>{
-    res.render("landlord/landlord_item.ejs");
+    res.render("governor/governor_dashboard.ejs");
 });
 
 app.get("/login",(req,res)=>{
@@ -47,11 +47,11 @@ app.get("/regis/landlord",(req,res)=>{
 });
 
 app.get("/landlord",(req,res)=>{
-    res.render("landlord/landlord_main.ejs");
+    res.render("landlord/landlord_main.ejs",{user_name: user_now});
 });
 
 app.get("/land",(req,res)=>{
-    res.render("landlord/landlord_land.ejs");
+    res.render("landlord/landlord_land.ejs",{user_name: user_now});
 });
 
 app.get("/land/create",(req,res)=>{
@@ -71,21 +71,42 @@ app.post("/regis/customer/send",async (req,res)=>{
     }
 });
 
+app.post("/regis/landlord/send",async (req,res)=>{
+    const pass1 = req.body.password1;
+    const pass2 = req.body.password2;
+    
+    
+    if(pass1 == pass2){
+        await db.query("INSERT INTO users (name,password,role) VALUES ($1,$2,$3)",[req.body.username,pass1,"landlord"]);
+        res.redirect("/login");
+    }else{
+        res.redirect("/regis/landlord");
+    }
+});
+
 app.post("/login/send",async (req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
+
+    console.log(username,password);
     try{
         const result = await db.query("SELECT * FROM users WHERE name = ($1)",[username]);
         const data = result.rows[0];
+
         if(data.password === password){
             user_now = data.name;
-            res.redirect("/home_customer")
+            console.log(user_now);
+            if(data.role === "customer"){
+                res.redirect("/home_customer");
+            }else if(data.role === "landlord"){
+                res.redirect("/landlord");
+            }
         }else{
             console.log("Incorrect password");
             res.redirect("/login");
         }
     }catch(err){
-        console.log(err);
+        console.log("it went to errer : ",err);
     }
 });
 
