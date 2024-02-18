@@ -1,0 +1,228 @@
+body{
+    background-color: white;
+}
+
+.main-div{
+    width: 100%;
+    height: 900px;
+    
+    background-color: white;
+
+    display: grid;
+    justify-items: center;
+
+    grid-template-rows: 10% 1fr;
+}
+
+
+/* Nav bar */
+
+.up-bar{
+    width: 65%;
+    height: 80%;
+
+    background-color: #EEE3CB;
+
+    border-radius: 50px;
+
+    display: grid;
+    grid-template-columns:30% 25%;
+    justify-content: space-between;
+}
+
+.up-right{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-box{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.up-left{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+h1, p, button, h2{
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-weight:500;
+}
+
+button{
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    background-color:transparent;
+}
+
+option{
+    border-radius: 20px;
+    border: none;
+}
+
+form[id="filter"]{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+form[id="filter"]>button,form[id="filter"]>div{
+    padding: 0px 10px;
+}
+form[id="filter"]>div>select{
+    width: 80px;
+}
+
+
+/* content */
+
+/* content */
+.content{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 7% 1fr;
+    margin-top: 3%;
+    position: relative; 
+}
+
+/* Small line in the middle */
+.content::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 1px); 
+    height: 100%;
+    width: 1px;
+    background-color: gray; 
+}
+
+
+/* left side */
+.landlordheading{
+    display: grid;
+    height: 100%;
+    background-color: #423f4e;
+    grid-column: 1/1;
+    grid-row: 1/1;
+    text-align: center;
+    align-content: center;
+
+    font-size: 20px;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight:700;
+    
+    border-left: 5px ;
+}
+
+
+/* right side */
+.Userheading{
+    display: grid;
+    height: 100%;
+    background-color: #423f4e;
+    grid-column: 2/2;
+    grid-row: 1/1;
+    text-align: center;
+    align-content: center;
+
+    font-size: 20px;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight:700;
+}
+
+.landlord,
+.User {
+    margin-top: 2%;
+}
+
+
+/* Ban button */
+.ban-button {
+    background-color: #ef4e4e; 
+    border-radius: 25%; 
+    color: white; 
+    font-size: 14px; 
+    border: 2px solid red; /* Add a red border */
+    padding: 5px 10px; /* Adjust padding for better appearance */
+}
+
+/* Adjust the button position to the end of the cell */
+.landlordside table td,
+.Userside table td {
+    position: relative;
+}
+
+.landlordside table td .ban-button,
+.Userside table td .ban-button {
+    position: absolute;
+    right: 5dvh; /* Adjust the value as needed */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+/* table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    height: 4dvh;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.landlordside table td button,
+.Userside table td button {
+    font-weight: 600;
+    font-size: 16px; 
+}
+
+.test1,
+.test2 {
+    text-decoration: underline;
+}
+
+
+
+/* footer */
+
+.footer{
+    margin-top: 40%;
+    width: 100%;
+    height: 300px;
+
+    background-color: #625b56;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer>p{
+    color:#d7c6ba;
+}
+
+button{
+    cursor: pointer; 
+}
