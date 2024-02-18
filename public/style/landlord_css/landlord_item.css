@@ -48,12 +48,14 @@
 }
 
 .up-left{
-    margin-left: 30px;
+    margin-left: 20px;
     width: 100%;
+    
     display: grid;
-    grid-template-columns: 20% 40%;
+    grid-template-columns: 35px 40%;
     justify-content: flex-start;
     align-items: center;
+
     /* background-color: aliceblue; */
 }
 
@@ -115,7 +117,7 @@ h1{
     height: 700px;
 
     /* background-color: #f4ebd8; */
-    border: #dbdbdb solid 1px;
+    border: #3b3b3b solid 1px;
     border-radius: 20px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
@@ -175,7 +177,6 @@ h1{
     display: grid;
     justify-content: flex-end;
     align-items: center;
-    margin-left: 100%;
 }
 
 .input-container {
@@ -334,7 +335,7 @@ h1{
 }
 
 img{
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 
