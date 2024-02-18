@@ -1,0 +1,196 @@
+body{
+    background-color: white;
+}
+
+.main-div{
+    width: 100%;
+    height: 900px;
+    
+    background-color: white;
+
+    display: grid;
+    justify-items: center;
+
+    grid-template-rows: 10% 1fr;
+}
+
+/* Nav bar */
+
+.up-bar{
+    width: 65%;
+    height: 80%;
+
+    background-color: #EEE3CB;
+
+    border-radius: 50px;
+
+    display: grid;
+    grid-template-columns:30% 25%;
+    justify-content: space-between;
+}
+
+.up-right{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-box{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.up-left{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+h1, p, button, h2{
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-weight:500;
+}
+
+button{
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    background-color:transparent;
+}
+
+option{
+    border-radius: 20px;
+    border: none;
+}
+
+form[id="filter"]{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+form[id="filter"]>button,form[id="filter"]>div{
+    padding: 0px 10px;
+}
+form[id="filter"]>div>select{
+    width: 80px;
+}
+
+
+/* content */
+
+.content {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+
+    width: 85%;
+    margin-top: 3%;
+}
+
+.left-mid{
+    grid-column: 1 / 3;
+}
+.heading h1{
+    display: flex;
+    background-color: #EEE3CB;
+    border-radius: 20%;
+    height: 7dvb;
+    width: 30dvb;
+    padding-left: 2%;
+    padding-right: 2%;
+
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* graph */
+.graph {
+    margin-top: 20px; /* Adjust as needed */
+    width: 300px;
+    height: 300px;
+    background-color: #007bff;
+}
+
+
+/* info, right */
+.right {
+    grid-column: 3;
+    margin-top: 8%;
+}
+
+table {
+    border-collapse: collapse; 
+    overflow: hidden; /* Hide the overflowing content outside the rounded corners */
+    width: 100%;
+}
+
+th{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+
+    background-color: #423f4e;
+    height: 10dvh;
+    border: 1px solid #dddddd;
+    padding: 2dvh 20px;
+    color: white;
+
+    border-top-left-radius: 20px; 
+}
+
+td {
+    border: 1px solid #dddddd;
+    padding: 0.7dvh;
+    height: 4dvh;
+    padding-right: 3%;
+}
+
+th:nth-child(2) {
+    border-top-left-radius: 0; /* Ensure the top-left corner of the second header is not rounded */
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.info1 td{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: large;
+    text-align: right;
+}
+
+
+
+
+
+/* footer */
+.footer{
+    margin-top: 40%;
+    width: 100%;
+    height: 300px;
+
+    background-color: #625b56;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer>p{
+    color:#d7c6ba;
+}
+
+button{
+    cursor: pointer; 
+}
