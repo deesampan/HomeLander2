@@ -31,7 +31,7 @@ app.use(express.static("public"));
 
 //login backend
 app.get("/",(req,res)=>{
-    res.render("landlord/landlord_item.ejs");
+    res.render("admin/admin_edit_land.ejs");
 });
 
 app.get("/login",(req,res)=>{
