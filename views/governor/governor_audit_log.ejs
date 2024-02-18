@@ -7,7 +7,21 @@
         <link rel="stylesheet" href="/style/governor/style_governor_audit_log.css" />
     </head>
     <body>
-        <div class="header">header</div>
+        <div class="up-bar">
+            <div class="up-left">
+                <img id="logo" src="/images/office.png" width="35px" height="35px"/>
+                <form action="/" method="get" id="filter">
+                    <button type="submit" formaction="/" id="home">Home</button>
+                    <button type="submit" formaction="/about" id="about">About</button>
+                </form>
+            </div>
+            <div class="up-right">
+                <form action="/login" method="get">
+                    <button type="submit" formaction="/login" id="login">Login</button>
+                    <button type="submit" formaction="/login" id="regis">Register</button>
+                </form>
+            </div>
+        </div>
         <table>
             <tr>
                 <th>Date</th>
