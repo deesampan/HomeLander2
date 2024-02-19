@@ -1,4 +1,3 @@
-.header {grid-area: header;}
 .transaction_graph {grid-area: tg;}
 .user_graph {grid-area: ug;}
 .daily_transaction {
@@ -50,4 +49,30 @@
     grid-templates-column: 1fr 1fr 1fr 1fr 1fr; */
     border-radius: 25px;
     padding: 5px;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #EEE3CB;
+    grid-area: header;
+    border-radius: 15px;
+}
+
+.topnav a {
+    float: left;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a.active {
+    background-color: #423F4E;
+    color: white;
+}
+
+.topnav a:hover {
+    background-color: #607274;
+    color: white;
 }
