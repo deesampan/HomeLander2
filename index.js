@@ -20,7 +20,7 @@ const db = new pg.Client({
     database:process.env.DATABASE, //have to be match with same name
     host:process.env.HOST,
 });
-// db.connect(); //for connecting database with your postgresql
+db.connect(); //for connecting database with your postgresql
 
 //checking which user is active now
 let user_now = "name_of_user";
@@ -31,7 +31,7 @@ app.use(express.static("public"));
 
 //login backend
 app.get("/",(req,res)=>{
-    res.render("admin/admin_edit_land.ejs");
+    res.render("main_page.ejs");
 });
 
 app.get("/login",(req,res)=>{
