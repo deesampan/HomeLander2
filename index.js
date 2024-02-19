@@ -4,7 +4,7 @@ import BodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcrypt";
 import path from "path";
-// import 'dotenv/config';
+import 'dotenv/config';
 
 const app = express()
 const port = 3000;
@@ -30,8 +30,8 @@ let user_now = "name_of_user";
 app.use(express.static("public"));
 
 //login backend
-app.get("/admin",(req,res)=>{
-    res.render("admin/admin_edit_land.ejs");
+app.get("/",(req,res)=>{
+    res.render("main_page.ejs");
 });
 
 app.get("/login",(req,res)=>{
@@ -47,7 +47,7 @@ app.get("/regis/landlord",(req,res)=>{
 });
 
 app.get("/landlord",(req,res)=>{
-    res.render("landlord/landlord_main.ejs");
+    res.render("landlord/landlord_main.ejs",{username : user_now});
 });
 
 app.get("/land",(req,res)=>{
@@ -79,7 +79,16 @@ app.post("/login/send",async (req,res)=>{
         const data = result.rows[0];
         if(data.password === password){
             user_now = data.name;
-            res.redirect("/home_customer")
+            if(data.role === "customer"){
+                res.redirect("/home_customer");
+            }else if (data.role === "landlord"){
+                res.redirect("/landlord");
+            }
+            else if(data.role === "admin"){
+                res.redirect("/admin");
+            }else if(data.role === "governor"){
+                res.redirect("/Dashboard");
+            }
         }else{
             console.log("Incorrect password");
             res.redirect("/login");
@@ -87,6 +96,16 @@ app.post("/login/send",async (req,res)=>{
     }catch(err){
         console.log(err);
     }
+});
+
+//customer
+
+app.get("/fav",(req,res)=>{
+   res.render("customer/customer_fav.ejs"); 
+});
+
+app.post("/customer/addfav",(req,res)=>{
+    res.render("customer/customer_fav.ejs");
 });
 
 
@@ -118,4 +137,40 @@ app.get("/governor/audit",(req,res)=>{
 app.listen(port,()=>{
     console.log("server is work!");
 });
+
+//admin
+app.get("/admin",(req,res)=>{
+    res.render("admin/admin_dash.ejs");
+})
+
+app.get("/admin_land",(req,res)=>{
+    res.render("admin/admin_land.ejs");
+})
+
+app.get("/admin_user",(req,res)=>{
+    res.render("admin/admin_user.ejs");
+})
+
+app.get("/admin/Blacklist",(req,res)=>{
+    res.render("admin/admin_blacklist.ejs");
+})
+
+app.get("/admin/landlord/detail",(req,res)=>{
+    res.render("admin/admin_detail_landlord.ejs");
+})
+
+app.get("/admin/user/detail",(req,res)=>{
+    res.render("admin/admin_detail_user.ejs");
+})
+
+
+
+//governor
+app.get("/Dashboard",(req,res)=>{
+    res.render("governor/governor_dashboard.ejs");
+})
+
+app.get("/governor/audit", (req,res)=>{
+    res.render("governor/governor_audit_log.ejs");
+})
 

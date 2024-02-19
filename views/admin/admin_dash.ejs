@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Inter:wght@100&family=Nunito:ital,wght@1,300&family=Open+Sans:wght@300&family=Salsa&display=swap" rel="stylesheet">    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
     <div class="main-div">
@@ -15,9 +17,9 @@
             <div class="up-left">
                 <img id="logo" src="/images/office.png" width="35px" height="35px"/>
                 <form action="/" method="get" id="filter">
-                    <button type="submit" formaction="/" id="dash"><b>Dashboard</b></button>
+                    <button type="submit" formaction="/admin" id="dash"><b>Dashboard</b></button>
                     <button type="submit" formaction="/admin_land" id="land">Land</button>
-                    <button type="submit" formaction="/admin_User" id="user">User</button>
+                    <button type="submit" formaction="/admin_user" id="user">User</button>
                 </form>
             </div>
             <div class="up-right right-box">
@@ -29,46 +31,60 @@
         <div class="content">
             <div class="left">
                 <div class="topicL">
-                    <h2 id="h2">most people are interest in:</h2>
+                    <h2 id="h2">What people like:</h2>
                 </div>
                 <table class="infoL">
                     <tr>
-                        <td>-xxxx</td>
+                        <td>-Townhome</td>
+                        <td class="price">20</td>
                     </tr>
                     <tr>
-                        <td>-xxxx</td>
+                        <td>-Tiny</td>
+                        <td class="price">12</td>
+                    </tr>
+                    <tr>
+                        <td>-Apartment</td>
+                        <td class="price">50</td>
+                    </tr>
+                    <tr>
+                        <td>-Big House</td>
+                        <td class="price">18</td>
                     </tr>
                 </table>
             </div>
             <div class="mid1">
                 <form>
                     <div class="tm1">
-                        <form action="/" method="get">
-                            <button type="submit" formaction="/UseAct" id="UseActButton">User activities</button>
-                            <div class="circle1"></div>
-                        </form>
+                        <!-- <form action="/" method="get">
+                            <button type="submit" formaction="/admin_dash/UserAct" id="UseActButton">User activities</button>
+                        </form> -->
+                        <button id="UseActButton">User activities</button>
+                        <canvas id="pieChart1" width="200" height="200"></canvas>
                     </div>
                 </form>
             </div>
             <div class="mid2">
                 <div class="tm2">
-                    <form action="/" method="get">
-                    <button type="submit" formaction="/landlord" id="landlordButton">Landlord</button>
-                    </form>
-                    <div class="circle2"></div>
+                    <!-- <form action="/" method="get">
+                        <button type="submit" formaction="/admin_dash/landlord" id="landlordButton">Landlord</button>
+                    </form> -->
+                    <button id="landlordButton">Landlord</button>
+                    <canvas id="pieChart2" width="200" height="200"></canvas>
                 </div>
             </div>
             <div class="right">
                 <div class="topicR">
-                    <h2 id="h2">Success sales:</h2>
+                    <h2 id="h2">Land availability:</h2>
                 </div>
                 <table class="infoR">
                     <tr>
-                        <td>-xxxx</td>
+                        <td class="status available">Available</td>
+                        <td>-Michle</td>
                     </tr>
                     <tr>
-                        <td>-xxxx</td>
-                    </tr>
+                        <td class="status unavailable">Unavailable</td>
+                        <td>-David</td>
+                    </tr>                    
                 </table>
             </div>
         </div>
@@ -78,5 +94,61 @@
     <div class="footer">
         <p>Home Lander | Database System Project</p>
     </div>            
+
+    <script>
+        // Data for the first pie chart (circle1)
+        var data1 = {
+            labels: ['Townhome', 'Tiny', 'Apartment', 'Big House'],
+            datasets: [{
+                data: [20, 12, 50, 18],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+            }]
+        };
+    
+        // Options for the first pie chart
+        var options1 = {
+            legend: {
+                position: 'bottom' // Position the legend at the bottom
+            }
+        };
+    
+        // Get the canvas element
+        var ctx1 = document.getElementById('pieChart1').getContext('2d');
+    
+        // Create the pie chart
+        var pieChart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: data1,
+            options: options1
+        });
+    
+        // Data for the second pie chart (circle2)
+        var data2 = {
+            labels: ['Avaliable', 'Unavalible'],
+            datasets: [{
+                data: [50, 50],
+                backgroundColor: ['green', 'red']
+            }]
+        };
+    
+        // Options for the second pie chart
+        var options2 = {
+            labels: {
+                position: 'bottom' // Position the legend at the bottom
+            }
+        };
+    
+        // Get the canvas element
+        var ctx2 = document.getElementById('pieChart2').getContext('2d');
+    
+        // Create the pie chart
+        var pieChart2 = new Chart(ctx2, {
+            type: 'pie',
+            data: data2,
+            options: options2
+        });
+    </script>
+    
+    
 </body>
 </html>

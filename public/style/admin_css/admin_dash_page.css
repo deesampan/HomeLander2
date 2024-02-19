@@ -121,13 +121,6 @@ form[id="filter"]>div>select{
     justify-content: center;
 }
 
-.circle1{
-    width: 300px; 
-    height: 300px;
-    background-color: #007bff; 
-    border-radius: 50%;
-    margin: auto;
-}
 
 
 /* middle 2, the second pie chart */
@@ -204,7 +197,6 @@ table {
 }
 
 td, th {
-    border: 1px solid #dddddd;
     padding: 0.7dvh;
     height: 4dvh;
 }
@@ -220,8 +212,31 @@ tr:nth-child(even) {
     font-size: large;
 }
 
+.infoL td{
+    padding-left: 5%;
+}
+
 .infoR td{
-    text-align: right;
+    padding-left: 5%;
+}
+
+.price{
+    text-align: end;
+    padding-right: 5%;
+}
+
+#pieChart2{
+    margin-top: 1dvh;
+}
+
+/* Define styles for the 'Available' status */
+.status.available {
+    color: green;
+}
+
+/* Define styles for the 'Unavailable' status */
+.status.unavailable {
+    color: red;
 }
 
 

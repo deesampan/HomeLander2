@@ -15,7 +15,7 @@
             <div class="up-left">
                 <img id="logo" src="/images/office.png" width="35px" height="35px"/>
                 <form action="/" method="get" id="filter">
-                    <button type="submit" formaction="/" id="dash">Dashboard</button>
+                    <button type="submit" formaction="/admin" id="dash">Dashboard</button>
                     <button type="submit" formaction="/admin_land" id="land">Land</button>
                     <button type="submit" formaction="/admin_User" id="user"><b>User</b></button>
                 </form>
@@ -31,10 +31,26 @@
             <div class="landlordside">
                 <table>
                     <tr>
-                        <td><button class="test1">landlord 1</button> <button class="ban-button">Ban</button></td>
+                        <td>
+                            <form action="/admin/landlord/detail" method="get">
+                                <button class="test1">Michle</button>
+                            </form> 
+                            <button class="ban-button">Ban</button>
+                        </td>
+                        <td> <form action="/admin/Blacklist" method="get">
+                            <button class="blacklist-button">Blacklist</button>
+                        </form></td>
                     </tr>
                     <tr>
-                        <td><button class="test1">landlord 2</button><button class="ban-button">Ban</button></td>
+                        <td>
+                            <form action="/admin/landlord/detail" method="get">
+                                <button class="test1">David</button>
+                            </form> 
+                            <button class="ban-button">Ban</button>
+                        </td>
+                        <td> <form action="/admin/Blacklist" method="get">
+                            <button class="blacklist-button">Blacklist</button>
+                        </form></td>
                     </tr>
                 </table>
 
@@ -43,10 +59,28 @@
             <div class="Userside"> 
                 <table>
                     <tr>
-                        <td><button class="test2">User 1</button> <button class="ban-button">Ban</button></td>
+                        <td>
+                            <form action="/admin/user/detail" method="get">
+                                <button class="test1">Shawn</button>
+                            </form> 
+                            <button class="ban-button">Ban</button>
+                        </td>
+                        <td> <form action="/admin/Blacklist" method="get">
+                            <button class="blacklist-button">Blacklist</button>
+                        </form></td>
                     </tr>
                     <tr>
-                        <td><button class="test2">User 2</button> <button class="ban-button">Ban</button></td>
+                        <td>
+                            <form action="/admin/user/detail" method="get">
+                                <button class="test1">Connor</button>
+                            </form> 
+                        <button class="ban-button">Ban</button>
+                        </td>
+                        <td>
+                            <form action="/admin/Blacklist" method="get">
+                                <button class="blacklist-button">Blacklist</button>
+                            </form>
+                        </td>
                     </tr>
                 </table>
             </div>
