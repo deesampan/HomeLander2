@@ -10,9 +10,11 @@
     <div>
         <!-- <div class="main-div"> !-->
         <div class="topnav">
+            <div>
             <a class="active" href="#Dashboard">Dashboard</a>
             <a href="governor/audit">Audit logs</a>
-            <a><img src="/images/circle-user.png" height="25px" width="25px" /></a>
+            </div>
+            <div class="profile">John Doe&nbsp;&nbsp;<img src="/images/circle-user.png" height="15px" width="15px" /></div>
         </div> 
             <!-- <div class="up-bar">
                 <div class="up-left">
@@ -28,11 +30,11 @@
                     <img src="/images/circle-user.png" height="25px" width="25px" />
                 </div> -->
             </div>
-            <div> 
+            <div style="margin: 35px;"> 
                 <label>Date: <select><option selected>Daily</option></select></label>
                 <label>User types: <select><option selected>All</option></select></label>
             </div>
-            <div class="grid_container">
+            <div class="grid_container" style="margin: 35px;">
                     <div class="transaction_graph">
                         <h2>Transaction</h2>
                         <canvas id="myChart" style="width:100%;max-width:600px"></canvas>

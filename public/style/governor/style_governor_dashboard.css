@@ -65,12 +65,14 @@
 
 .topnav {
     overflow: hidden;
+    display: flex;
     background-color: #EEE3CB;
     grid-area: header;
-    border-radius: 15px;
+    border-radius: 20px;
     /* padding: 10px; */
     /* border-radius: 10px; */
     margin: 35px;
+    justify-content: space-between;
 }
 
 .topnav a {
@@ -90,6 +92,14 @@
 .topnav a:hover {
     background-color: #607274;
     color: white;
+}
+
+.profile {
+    float: right;
+    justify-content: end;
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
 }
 
 label{
