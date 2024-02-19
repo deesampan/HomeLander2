@@ -4,7 +4,7 @@ import BodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcrypt";
 import path from "path";
-// import 'dotenv/config';
+import 'dotenv/config';
 
 const app = express()
 const port = 3000;
@@ -30,8 +30,8 @@ let user_now = "name_of_user";
 app.use(express.static("public"));
 
 //login backend
-app.get("/admin",(req,res)=>{
-    res.render("admin/admin_edit_land.ejs");
+app.get("/",(req,res)=>{
+    res.render("main_page.ejs");
 });
 
 app.get("/login",(req,res)=>{
@@ -85,7 +85,7 @@ app.post("/login/send",async (req,res)=>{
                 res.redirect("/landlord");
             }
             else if(data.role === "admin"){
-
+                res.redirect("/admin");
             }else if(data.role === "governor"){
                 res.redirect("/Dashboard");
             }
@@ -139,7 +139,9 @@ app.listen(port,()=>{
 });
 
 //admin
-
+app.get("/admin",(req,res)=>{
+    res.render("admin/admin_dash.ejs");
+})
 
 
 //governor
