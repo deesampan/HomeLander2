@@ -108,7 +108,7 @@ app.get("/search",(req,res)=>{
 app.get("/items/id",(req,res)=>{
     res.render("customer/customer_item.ejs");
 })
-app.get("/",(req,res)=>{
+app.get("/governor/dashboard",(req,res)=>{
     res.render("governor/governor_dashboard.ejs");
 })
 app.get("/governor/audit",(req,res)=>{
