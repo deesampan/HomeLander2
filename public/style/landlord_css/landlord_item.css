@@ -302,13 +302,16 @@ h1{
 /* .container input[id="radio-1"]:checked ~ .glider {
   transform: translateX(0);
 } */
-
-.container input[id="radio-2"]:checked ~ .glider {
+.container input[id="radio-1"]:checked ~ .glider {
   transform: translateX(0%);
 }
 
-.container input[id="radio-3"]:checked ~ .glider {
+.container input[id="radio-2"]:checked ~ .glider {
   transform: translateX(100%);
+}
+
+.container input[id="radio-3"]:checked ~ .glider {
+  transform: translateX(200%);
 }
 
 .glider {
