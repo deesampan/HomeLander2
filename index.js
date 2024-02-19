@@ -4,7 +4,7 @@ import BodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcrypt";
 import path from "path";
-import 'dotenv/config';
+// import 'dotenv/config';
 
 const app = express()
 const port = 3000;
@@ -30,7 +30,7 @@ let user_now = "name_of_user";
 app.use(express.static("public"));
 
 //login backend
-app.get("/",(req,res)=>{
+app.get("/admin",(req,res)=>{
     res.render("admin/admin_edit_land.ejs");
 });
 
@@ -107,6 +107,12 @@ app.get("/search",(req,res)=>{
 
 app.get("/items/id",(req,res)=>{
     res.render("customer/customer_item.ejs");
+})
+app.get("/",(req,res)=>{
+    res.render("governor/governor_dashboard.ejs");
+})
+app.get("/governor/audit",(req,res)=>{
+    res.render("governor/governor_audit_log.ejs");
 })
 
 app.listen(port,()=>{
