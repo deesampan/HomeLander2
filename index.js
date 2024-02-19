@@ -4,7 +4,7 @@ import BodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcrypt";
 import path from "path";
-import 'dotenv/config';
+// import 'dotenv/config';
 
 const app = express()
 const port = 3000;
@@ -20,7 +20,7 @@ const db = new pg.Client({
     database:process.env.DATABASE, //have to be match with same name
     host:process.env.HOST,
 });
-// db.connect(); //for connecting database with your postgresql
+db.connect(); //for connecting database with your postgresql
 
 //checking which user is active now
 let user_now = "name_of_user";
@@ -30,7 +30,7 @@ let user_now = "name_of_user";
 app.use(express.static("public"));
 
 //login backend
-app.get("/",(req,res)=>{
+app.get("/admin",(req,res)=>{
     res.render("admin/admin_edit_land.ejs");
 });
 
@@ -47,7 +47,7 @@ app.get("/regis/landlord",(req,res)=>{
 });
 
 app.get("/landlord",(req,res)=>{
-    res.render("landlord/landlord_main.ejs");
+    res.render("landlord/landlord_main.ejs",{username : user_now});
 });
 
 app.get("/land",(req,res)=>{
@@ -79,7 +79,16 @@ app.post("/login/send",async (req,res)=>{
         const data = result.rows[0];
         if(data.password === password){
             user_now = data.name;
-            res.redirect("/home_customer")
+            if(data.role === "customer"){
+                res.redirect("/home_customer");
+            }else if (data.role === "landlord"){
+                res.redirect("/landlord");
+            }
+            else if(data.role === "admin"){
+
+            }else if(data.role === "governor"){
+                res.redirect("/Dashboard");
+            }
         }else{
             console.log("Incorrect password");
             res.redirect("/login");
@@ -87,6 +96,16 @@ app.post("/login/send",async (req,res)=>{
     }catch(err){
         console.log(err);
     }
+});
+
+//customer
+
+app.get("/fav",(req,res)=>{
+   res.render("customer/customer_fav.ejs"); 
+});
+
+app.post("/customer/addfav",(req,res)=>{
+    res.render("customer/customer_fav.ejs");
 });
 
 
@@ -108,8 +127,27 @@ app.get("/search",(req,res)=>{
 app.get("/items/id",(req,res)=>{
     res.render("customer/customer_item.ejs");
 })
+app.get("/governor/dashboard",(req,res)=>{
+    res.render("governor/governor_dashboard.ejs");
+})
+app.get("/governor/audit",(req,res)=>{
+    res.render("governor/governor_audit_log.ejs");
+})
 
 app.listen(port,()=>{
     console.log("server is work!");
 });
+
+//admin
+
+
+
+//governor
+app.get("/Dashboard",(req,res)=>{
+    res.render("governor/governor_dashboard.ejs");
+})
+
+app.get("/governor/audit", (req,res)=>{
+    res.render("governor/governor_audit_log.ejs");
+})
 

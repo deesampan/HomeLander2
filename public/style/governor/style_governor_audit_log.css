@@ -1,6 +1,7 @@
 table {
     border-collapse: collapse;
     width: 100%;
+    border: 0;
 }
 
 th {
@@ -17,4 +18,73 @@ td {
 tr:nth-child(even) {
     background-color: #F6F6F6;
     color: #001524;
+}
+
+.up-bar{
+    width: 65%;
+    height: 80%;
+
+    background-color: #EEE3CB;
+
+    border-radius: 50px;
+
+    display: grid;
+    grid-template-columns:30% 25%;
+    justify-content: space-between;
+}
+
+.up-right{
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.right-box{
+    width: 80%;
+
+    display: grid;
+    justify-items: flex-end;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.up-left{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #EEE3CB;
+    grid-area: header;
+    border-radius: 15px;
+    /* padding: 10px; */
+    /* border-radius: 10px; */
+    margin: 35px;
+}
+
+.topnav a {
+    float: left;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a.active {
+    background-color: #423F4E;
+    color: white;
+}
+
+.topnav a:hover {
+    background-color: #607274;
+    color: white;
+}
+
+button {
+    position:absolute; right: 70px;
+    
 }

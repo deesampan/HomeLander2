@@ -7,81 +7,114 @@
         <link rel="stylesheet" href="/style/governor/style_governor_dashboard.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     </head>
-    <body>
-        <div class="grid_container">
-            <div class="up-bar">
+    <div>
+        <!-- <div class="main-div"> !-->
+        <div class="topnav">
+            <a class="active" href="#Dashboard">Dashboard</a>
+            <a href="governor/audit">Audit logs</a>
+            <a><img src="/images/circle-user.png" height="25px" width="25px" /></a>
+        </div> 
+            <!-- <div class="up-bar">
                 <div class="up-left">
                     <img id="logo" src="/images/office.png" width="35px" height="35px"/>
                     <form action="/" method="get" id="filter">
-                        <button type="submit" formaction="/" id="home">Home</button>
-                        <button type="submit" formaction="/about" id="about">About</button>
+                        <button type="submit" formaction="/" id="dash">Dashboard</button>
+                        <button type="submit" formaction="/admin_land" id="land"><b>Land</b></button>
+                        <button type="submit" formaction="/admin_User" id="user">User</button>
                     </form>
                 </div>
-                <div class="up-right">
-                    <form action="/login" method="get">
-                        <button type="submit" formaction="/login" id="login">Login</button>
-                        <button type="submit" formaction="/login" id="regis">Register</button>
-                    </form>
+                <div class="up-right right-box">
+                    <p>admin_name</p>
+                    <img src="/images/circle-user.png" height="25px" width="25px" />
+                </div> -->
+            </div>
+            <div> 
+                <label>Date: <select><option selected>Daily</option></select></label>
+                <label>User types: <select><option selected>All</option></select></label>
+            </div>
+            <div class="grid_container">
+                    <div class="transaction_graph">
+                        <h2>Transaction</h2>
+                        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                        <script>
+                        const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+                        const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+                        new Chart("myChart", {
+                        type: "line",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    fill: false,
+                                    lineTension: 0,
+                                    backgroundColor: "rgba(0,0,255,1.0)",
+                                    borderColor: "rgba(0,0,255,0.1)",
+                                    data: yValues
+                                }]
+                            },
+                            options: {
+                                legend: {display: false},
+                                scales: {
+                                    yAxes: [{ticks: {min: 6, max:16}}],
+                                }
+                            }
+                        });
+                        </script>
+                    </div>
+                    <div class="user_graph">
+                        <h2>Users</h2>
+                        <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+                        <script>
+                            const xvalues = [50,60,70,80,90,100,110,120,130,140,150];
+                            const yvalues = [7,8,8,9,9,9,10,11,14,14,15];
+
+                        new Chart("myChart1", {
+                        type: "line",
+                            data: {
+                                labels: xvalues,
+                                datasets: [{
+                                    fill: false,
+                                    lineTension: 0,
+                                    backgroundColor: "rgba(0,0,255,1.0)",
+                                    borderColor: "rgba(0,0,255,0.1)",
+                                    data: yvalues
+                                }]
+                            },
+                            options: {
+                                legend: {display: false},
+                                scales: {
+                                    yAxes: [{ticks: {min: 6, max:16}}],
+                                }
+                            }
+                        });
+                        </script>
+                    </div>
+                    <div class="daily_transaction">
+                        <div class="block">
+                            <Div>Daily Transaction</Div>
+                            <Div>300,000</Div>
+                        </div>
+                    </div>
+                    <div class="recent_transaction">
+                        <div class="block">
+                            <section>Recent Transaction</section>
+                            <section>300,000</section>
+                        </div>
+                    </div>
+                    <div class="daily_user">
+                        <div class="block">
+                            <section>Daily Users</section>
+                            <section>300,000</section>
+                        </div>
+                    </div>
+                    <div class="total_user">
+                        <div class="block">
+                            <section>Total Users</section>
+                            <section>300,000</section>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="transaction_graph">
-            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-			<script>
-			const xValues = [50,60,70,80,90,100,110,120,130,140,150];
-			const yValues = [7,8,8,9,9,9,10,11,14,14,15];
-
-			new Chart("myChart", {
-            type: "line",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        fill: false,
-                        lineTension: 0,
-                        backgroundColor: "rgba(0,0,255,1.0)",
-                        borderColor: "rgba(0,0,255,0.1)",
-                        data: yValues
-                    }]
-                },
-                options: {
-                    legend: {display: false},
-                    scales: {
-                        yAxes: [{ticks: {min: 6, max:16}}],
-                    }
-                }
-			});
-			</script>
-            </div>
-            <div class="user_graph">
-                <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
-                <script>
-                    const xvalues = [50,60,70,80,90,100,110,120,130,140,150];
-                    const yvalues = [7,8,8,9,9,9,10,11,14,14,15];
-
-                new Chart("myChart1", {
-                type: "line",
-                    data: {
-                        labels: xvalues,
-                        datasets: [{
-                            fill: false,
-                            lineTension: 0,
-                            backgroundColor: "rgba(0,0,255,1.0)",
-                            borderColor: "rgba(0,0,255,0.1)",
-                            data: yvalues
-                        }]
-                    },
-                    options: {
-                        legend: {display: false},
-                        scales: {
-                            yAxes: [{ticks: {min: 6, max:16}}],
-                        }
-                    }
-                });
-                </script>
-            </div>
-            <div class="daily_transaction">Daily Transaction<br>300,000</div>
-            <div class="recent_transaction">Recent Transaction<br>300,000</div>
-            <div class="daily_user">Daily Users<br>300,000</div>
-            <div class="total_user">Total Users<br>300,000</div>
-        </div>
+        <!-- </div> -->
     </body>
 </html>
