@@ -20,7 +20,7 @@ const db = new pg.Client({
     database:process.env.DATABASE, //have to be match with same name
     host:process.env.HOST,
 });
-// db.connect(); //for connecting database with your postgresql
+db.connect(); //for connecting database with your postgresql
 
 //checking which user is active now
 let user_now = "name_of_user";
