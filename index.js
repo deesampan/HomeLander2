@@ -143,6 +143,27 @@ app.get("/admin",(req,res)=>{
     res.render("admin/admin_dash.ejs");
 })
 
+app.get("/admin_land",(req,res)=>{
+    res.render("admin/admin_land.ejs");
+})
+
+app.get("/admin_user",(req,res)=>{
+    res.render("admin/admin_user.ejs");
+})
+
+app.get("/admin/Blacklist",(req,res)=>{
+    res.render("admin/admin_blacklist.ejs");
+})
+
+app.get("/admin/landlord/detail",(req,res)=>{
+    res.render("admin/admin_detail_landlord.ejs");
+})
+
+app.get("/admin/user/detail",(req,res)=>{
+    res.render("admin/admin_detail_user.ejs");
+})
+
+
 
 //governor
 app.get("/Dashboard",(req,res)=>{
