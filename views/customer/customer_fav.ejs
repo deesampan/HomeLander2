@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeLander</title>
+    <link rel="stylesheet" href="/style/customer_css/style_customer_search.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Inter:wght@100&family=Nunito:ital,wght@1,300&family=Open+Sans:wght@300&family=Salsa&display=swap" rel="stylesheet">
+<style>
+    .buttoner {
+        margin-left: 50%;
+        width: 60%;
+
+        padding: 1.3em 3em;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 500;
+        color: #000;
+        background-color: #fff;
+        border: none;
+        border-radius: 45px;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+      }
+      
+      .buttoner:hover {
+        background-color: #23c483;
+        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+        color: #fff;
+        transform: translateY(-7px);
+      }
+      
+      .buttoner:active {
+        transform: translateY(-1px);
+      }
+</style>
+</head>
+<body>
+    <div class="main-div">
+        <div class="up-bar">
+            <div class="up-left">
+                <img id="logo" src="/images/office.png" width="35px" height="35px"/>
+                <form action="/" method="get" id="filter">
+                    <button type="submit" formaction="/home_customer" id="home">Home</button>
+                    <button type="submit" formaction="/search" id="search">Search</button>
+                    <button type="submit" formaction="/fav" id="about">Favorite</button>
+                </form>
+            </div>
+            <div class="up-right right-box">
+                <p><%= locals.customer_name %></p>
+                <img src="/images/circle-user.png" height="25px" width="25px" />
+            </div>
+        </div>
+        <div class="search-content">
+            <div class="search-filter">
+                <h1 class="search-title">Favorite</h1>
+                <div class="align-search-filter">
+                    
+                </div>
+            </div>
+            <div class="content-main">
+                <div class="search-filter-side">
+                    
+
+                </div>
+                <div class="content-list">
+                    <% for(var i = 0;i< 2;i++) { %>
+                        <div class="card">
+                            <div class="card-details">
+                                <img src="/images/hgouse.jpg" width="100%">
+                                <p class="text-title">Big House</p>
+                                <p class="text-body">$1,100,000</p>
+                                <form action="/customer/addfav" method="post"><button class="buttoner"> Remove🌟
+                                </button></form>
+                            </div>
+                            <form action="/items/id" method="get"><button class="card-button">More info</button></form>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rangevalue =  
+        document.querySelector(".slider-container .price-slider"); 
+        const rangeInputvalue =  
+        document.querySelectorAll(".range-input input"); 
+  
+// Set the price gap 
+let priceGap = 0; 
+  
+// Adding event listners to price input elements 
+const priceInputvalue =  
+    document.querySelectorAll(".price-input input"); 
+for (let i = 0; i < priceInputvalue.length; i++) { 
+    priceInputvalue[i].addEventListener("input", e => { 
+  
+        // Parse min and max values of the range input 
+        let minp = parseInt(priceInputvalue[0].value); 
+        let maxp = parseInt(priceInputvalue[1].value); 
+        let diff = maxp - minp 
+  
+        if (minp < 0) { 
+            alert("minimum price cannot be less than 0"); 
+            priceInputvalue[0].value = 0; 
+            minp = 0; 
+        } 
+  
+        // Validate the input values 
+        if (maxp > 1000000) { 
+            alert("maximum price cannot be greater than 10000"); 
+            priceInputvalue[1].value = 1000000; 
+            maxp = 1000000; 
+        } 
+  
+        if (minp > maxp - priceGap) { 
+            priceInputvalue[0].value = maxp - priceGap; 
+            minp = maxp - priceGap; 
+  
+            if (minp < 0) { 
+                priceInputvalue[0].value = 0; 
+                minp = 0; 
+            } 
+        } 
+  
+        // Check if the price gap is met  
+        // and max price is within the range 
+        if (diff >= priceGap && maxp <= rangeInputvalue[1].max) { 
+            if (e.target.className === "min-input") { 
+                rangeInputvalue[0].value = minp; 
+                let value1 = rangeInputvalue[0].max; 
+                rangevalue.style.left = `${(minp / value1) * 100}%`; 
+            } 
+            else { 
+                rangeInputvalue[1].value = maxp; 
+                let value2 = rangeInputvalue[1].max; 
+                rangevalue.style.right =  
+                    `${100 - (maxp / value2) * 100}%`; 
+            } 
+        } 
+    }); 
+  
+    // Add event listeners to range input elements 
+    for (let i = 0; i < rangeInputvalue.length; i++) { 
+        rangeInputvalue[i].addEventListener("input", e => { 
+            let minVal =  
+                parseInt(rangeInputvalue[0].value); 
+            let maxVal =  
+                parseInt(rangeInputvalue[1].value); 
+  
+            let diff = maxVal - minVal 
+              
+            // Check if the price gap is exceeded 
+            if (diff < priceGap) { 
+              
+                // Check if the input is the min range input 
+                if (e.target.className === "min-range") { 
+                    rangeInputvalue[0].value = maxVal - priceGap; 
+                } 
+                else { 
+                    rangeInputvalue[1].value = minVal + priceGap; 
+                } 
+            } 
+            else { 
+              
+                // Update price inputs and range progress 
+                priceInputvalue[0].value = minVal; 
+                priceInputvalue[1].value = maxVal; 
+                rangevalue.style.left = 
+                    `${(minVal / rangeInputvalue[0].max) * 100}%`; 
+                rangevalue.style.right = 
+                    `${100 - (maxVal / rangeInputvalue[1].max) * 100}%`; 
+            } 
+        }); 
+    } 
+}
+function enterFunction(e) {
+    if((e && e.keyCode == 13) || e == 0) {
+      document.forms.form01.submit("/kuy");
+      document.forms.form01.fname.value = ""; // could be form01.reset as well
+    }
+ }
+    </script> 
+</body>
+</html>
