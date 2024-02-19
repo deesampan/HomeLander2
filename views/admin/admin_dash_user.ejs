@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Inter:wght@100&family=Nunito:ital,wght@1,300&family=Open+Sans:wght@300&family=Salsa&display=swap" rel="stylesheet">    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="main-div">
@@ -29,23 +30,30 @@
         <div class="content">
             <div class="left">
                 <div class="heading"><h1>User activities</h1></div>
-                <div class="graph"></div>
+                <canvas id="pieChart1"></canvas>
             </div>
         
 
             <div class="right">
                 <table class="info1">
                     <tr>
-                        <th>Most poeple are interest in:</th>
-                        <th>Most people are buying:</th>
+                        <th colspan="2">What people like:</th>
                     </tr>
                     <tr>
-                        <td>-xxxx</td>
-                        <td>-xxxx</td>
+                        <td>-Townhome</td>
+                        <td class="price">20</td>
                     </tr>
                     <tr>
-                        <td>-xxxx</td>
-                        <td>-xxxx</td>
+                        <td>-Tiny</td>
+                        <td class="price">12</td>
+                    </tr>
+                    <tr>
+                        <td>-Apartment</td>
+                        <td class="price">50</td>
+                    </tr>
+                    <tr>
+                        <td>-Big House</td>
+                        <td class="price">18</td>
                     </tr>
                 </table>
             </div>
@@ -55,5 +63,34 @@
     <div class="footer">
         <p>Home Lander | Database System Project</p>
     </div>
+
+    <script>
+        // Data for the first pie chart (circle1)
+        var data1 = {
+            labels: ['Townhome', 'Tiny', 'Apartment', 'Big House'],
+            datasets: [{
+                data: [20, 12, 50, 18],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+            }]
+        };
+    
+        // Options for the first pie chart
+        var options1 = {
+            legend: {
+                position: 'bottom' // Position the legend at the bottom
+            }
+        };
+    
+        // Get the canvas element
+        var ctx1 = document.getElementById('pieChart1').getContext('2d');
+    
+        // Create the pie chart
+        var pieChart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: data1,
+            options: options1
+        });
+    </script>
+
 </body>
 </html>

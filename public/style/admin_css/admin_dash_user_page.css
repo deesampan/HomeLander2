@@ -92,7 +92,7 @@ form[id="filter"]>div>select{
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto;
 
-    width: 85%;
+    width: 65%;
     margin-top: 3%;
 }
 
@@ -130,8 +130,7 @@ form[id="filter"]>div>select{
 
 table {
     border-collapse: collapse; 
-    overflow: hidden; /* Hide the overflowing content outside the rounded corners */
-    width: 100%;
+    width: 40dvh;
 }
 
 th{
@@ -142,32 +141,30 @@ th{
     background-color: #423f4e;
     height: 10dvh;
     border: 1px solid #dddddd;
-    padding: 2dvh 20px;
+    padding: 0.7dvh;
     color: white;
 
     border-top-left-radius: 20px; 
+    border-top-right-radius: 20px;
 }
 
 td {
-    border: 1px solid #dddddd;
     padding: 0.7dvh;
     height: 4dvh;
     padding-right: 3%;
-}
-
-th:nth-child(2) {
-    border-top-left-radius: 0; /* Ensure the top-left corner of the second header is not rounded */
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: large;
+    padding-left: 5%;
 }
 
 tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-.info1 td{
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    font-size: large;
-    text-align: right;
+.price{
+    text-align: end;
+    padding-right: 5%;
 }
 
 
