@@ -1,0 +1,303 @@
+body{
+    background-color: white;
+}
+
+.main-div{
+    width: 100%;
+    height: 900px;
+    
+    background-color: white;
+
+    display: grid;
+    justify-items: center;
+
+    grid-template-rows: 10% 1fr;
+}
+
+/* Nav bar */
+
+.up-bar{
+    width: 65%;
+    height: 80%;
+
+    background-color: #EEE3CB;
+
+    border-radius: 50px;
+
+    display: grid;
+    grid-template-columns:30% 25%;
+    justify-content: space-between;
+}
+
+.up-right{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-box{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.up-left{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+h1, p, button, h2{
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-weight:500;
+}
+
+button{
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    background-color:transparent;
+}
+
+option{
+    border-radius: 20px;
+    border: none;
+}
+
+form[id="filter"]{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+form[id="filter"]>button,form[id="filter"]>div{
+    padding: 0px 10px;
+}
+form[id="filter"]>div>select{
+    width: 80px;
+}
+
+
+/* Old one */
+/* -------------------------------------------------- */
+/* topic */
+/* form[id="topic"] {
+    margin-top: 2%;
+    display: flex;
+    gap: 58%;
+    font-weight: bolder;
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    justify-content: center;
+}
+
+form[id="topic"] button {
+    width: auto;
+    font-size: larger;
+    font-weight: bold;
+} */
+
+
+/* maininfo */
+
+/* .maininfo{
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+h2[id=h2]{
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+}
+
+.information1{
+    background-color: #423f4e;
+    border-top-right-radius: 25px;
+    width: 9cm;
+    height: 2cm;
+}
+
+.circle1 {
+    width: 300px; 
+    height: 300px;
+    background-color: #007bff; 
+    border-radius: 50%;
+}
+
+.circle2 {
+    width: 300px; 
+    height: 300px;
+    background-color: #007bff; 
+    border-radius: 50%; 
+}
+
+.information2{
+    background-color: #423f4e;
+    border-top-left-radius: 25px;
+    width: 9cm;
+    height: 2cm;
+}
+
+.detail{
+    margin-top: -11%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail1{
+    padding-left: 2%;
+    justify-content: flex-end;
+}
+
+.detail2{
+    padding-right: 2%;
+    justify-content: end;
+} */
+
+/* -------------------------------------------------- */
+
+/* New one */
+/* -------------------------------------------------- */
+/* info */
+.info{
+    width: 100%;
+    height: 500px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1.5fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    border: #625b56;
+    margin-top: 2%;
+}
+
+/* Left, Most people interest */
+.left{
+    grid-column: 1/1;
+    grid-row: 1/7;
+    margin-right: 2%;
+}
+
+.topicL{
+    grid-column: 1/1;
+    grid-row: 1/1;
+    background-color: #423f4e;
+    border-top-right-radius: 25%;
+    padding: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.infoL{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+}
+
+/* middle 1, the first pie chart */
+.mid1{
+    grid-column: 2/4;
+    grid-row: 1/7;
+    margin-right: 2%;
+    justify-content: center;
+}
+
+.circle1{
+    width: 300px; 
+    height: 300px;
+    background-color: #007bff; 
+    border-radius: 50%;
+    margin: auto;
+}
+
+/* middle 2, the second pie chart */
+.mid2{
+    grid-column: 4/6;
+    grid-row: 1/7;
+    margin-right: 2%;
+}
+
+.circle2{
+    width: 300px; 
+    height: 300px;
+    background-color: #007bff; 
+    border-radius: 50%;
+    margin: auto;
+}
+
+/* Right, Succes sales */
+.right{
+    grid-column: 6/7;
+    grid-row: 1/7;
+}
+
+.topicR{
+    grid-column: 6/6;
+    grid-row: 1/1;
+    background-color: #423f4e;
+    border-top-left-radius: 25%;
+    padding: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.infoR{
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    justify-content: end;
+}
+
+
+/* topic for Left and Right */
+h2[id=h2]{
+    color: white;
+    text-align: center;
+    justify-content: center;
+}
+
+
+/* button in mid1 and mid2 */
+.tm1,
+.tm2 {
+    display: grid;
+    place-items: center; 
+    margin-top: 5%;
+}
+
+#UseAct,
+#landlord {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5%;
+    background-color: #EEE3CB;
+    border-radius: 25%;
+}
+
+/* -------------------------------------------------- */
+
+/* footer */
+
+.footer{
+    margin-top: 40%;
+    width: 100%;
+    height: 300px;
+
+    background-color: #625b56;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer>p{
+    color:#d7c6ba;
+}

@@ -37,8 +37,9 @@
                 <img id="logo" src="/images/office.png" width="35px" height="35px" />
                 <form action="/" method="get" id="filter">
                     <button type="submit" formaction="/landlord" id="home">Home</button>
-                    <button type="submit" formaction="/search" id="search">Search</button>
-                    <button type="submit" formaction="/about" id="about">About</button>
+                    <button style="font-weight: bolder;">Land for rent</button>
+                    <!-- <button type="submit" formaction="/search" id="search">Search</button>
+                    <button type="submit" formaction="/about" id="about">About</button> -->
                 </form>
             </div>
             <div class="up-right right-box">
@@ -57,11 +58,25 @@
                             <ul>
                                 <li><a href="#">Type &dtrif;</a>
                                     <ul class="dropdown">
-                                        <li><a href="#"><button type="submit">Townhome</button></a></li>
+                                        <li><a href="#"><button type="submit">Sale &nbsp;&nbsp;</button></a></li>
+                                        <li><a href="#"><button type="submit">Rent &nbsp;&nbsp;</button></a></li>
+                                        <!-- <li><a href="#"><button type="submit">Townhome</button></a></li>
                                         <li><a href="#"><button type="submit">Tiny</button></a></li>
                                         <li><a href="#"><button type="submit">Apartment</button></a></li>
-                                        <li><a href="#"><button type="submit">Big House</button></a></li>
+                                        <li><a href="#"><button type="submit">Big House</button></a></li> -->
                                     </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </form>
+                    <form action="/search/filter" method="post" class="formsearchfilter">
+                        <nav role="navigation" class="primary-navigation">
+                            <ul>
+                                <li><a href="#">Status &dtrif;</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#"><button type="submit">Available</button></a></li>
+                                        <li><a href="#"><button type="submit">Not Available</button></a></li>
+
                                 </li>
                             </ul>
                         </nav>
@@ -82,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="content-main">
 
                 <div class="content-list">
@@ -93,9 +108,29 @@
                                 <p class="text-title">Big House</p>
                                 <p class="text-body">$1,100,000</p>
                             </div>
-                            <form action="/land/create" method="get"><button class="card-button">Edit Land</button></form>
+                            <form action="/land/create" method="get"><button class="card-button">Edit Land</button>
+                            </form>
+
+                            <div class="status_A">Available</div>
+
+
                         </div>
-                        <% } %>
+                    <% } %>
+                    <% for(var i=0;i< 2;i++) { %>
+                        <div class="card">
+                            <div class="card-details">
+                                <img src="/images/hgouse.jpg" width="100%">
+                                <p class="text-title">Big House</p>
+                                <p class="text-body">$1,100,000</p>
+                            </div>
+                            <form action="/land/create" method="get"><button class="card-button">Edit Land</button>
+                            </form>
+
+                            <div class="status_NA">Not Available</div>
+
+
+                        </div>
+                    <% } %>
                 </div>
 
             </div>
