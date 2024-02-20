@@ -14,11 +14,11 @@ app.use(BodyParser.urlencoded({extended:false}));
 
 //connecting database user 
 const db = new pg.Client({
-    port:process.env.PORT,
-    user:process.env.USER,
-    password:process.env.PASSWORD, //fill with your damn password
-    database:process.env.DATABASE, //have to be match with same name
-    host:process.env.HOST,
+    port:5434,
+    user:"postgres",
+    password:"tonton123", //fill with your damn password
+    database:"homelander", //have to be match with same name
+    host:"localhost",
 });
 db.connect(); //for connecting database with your postgresql
 
