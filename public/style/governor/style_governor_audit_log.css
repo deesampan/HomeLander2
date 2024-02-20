@@ -58,6 +58,8 @@ tr:nth-child(even) {
 .topnav {
     overflow: hidden;
     background-color: #EEE3CB;
+    display: flex;
+    justify-content: space-between;
     grid-area: header;
     border-radius: 20px;
     /* padding: 10px; */
@@ -84,7 +86,17 @@ tr:nth-child(even) {
     color: white;
 }
 
-button {
+.profile {
+    float: right;
+    justify-content: end;
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.delete {
     position:absolute; right: 70px;
-    
+    background-color: #FF4444;
+    color: white;
+    border: 0 #FF4444;
 }
