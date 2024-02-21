@@ -147,18 +147,23 @@
 
                 </div>
                 <div class="content-list">
-                    <% for(var i = 0;i< 2;i++) { %>
-                        <div class="card">
-                            <div class="card-details">
-                                <img src="/images/hgouse.jpg" width="100%">
-                                <p class="text-title">Big House</p>
-                                <p class="text-body">$1,100,000</p>
-                                <form action="/customer/addfav" method="post"><button class="buttoner"> Add🌟
-                                </button></form>
+                    <% if (locals.lands){ %>
+                        <% lands.forEach((eachLand)=>{ %>
+                            <div class="card">
+                                <div class="card-details">
+                                    <img src="/images/<%= eachLand.land_image %>" width="100%">
+                                    <p class="text-title"><%= eachLand.land_name %></p>
+                                    <p class="text-body">$<%= eachLand.land_price %></p>
+                                    <form action="/customer/addfav" method="post">
+                                        <button class="buttoner" name="fav" value=<%= eachLand.land_id %>> Add🌟
+                                        </button>
+                                    </form>
+                                </div>
+                                <form action="/items/<%= eachLand.land_id %>" method="get"><button class="card-button">More info</button></form>
                             </div>
-                            <form action="/items/id" method="get"><button class="card-button">More info</button></form>
-                        </div>
+                        <% }) %>
                     <% } %>
+                    
                 </div>
             </div>
         </div>

@@ -17,41 +17,41 @@
             </form>
         </div>
         <div class="content">
-            <div class="left">
-                <div class="image">
-                    <img src="/images/hgouse.jpg" width="100%">
-                </div>
-                <div class="status">
-                    <div class="status-text">
-                        <h3>
-                            Status : Available
-                        </h3>
+            <% if(locals.lands){%>
+                <div class="left">
+                    <div class="image">
+                        <img src="/images/<%= lands.land_image %>" width="100%">
+                    </div>
+                    <div class="status">
+                        <div class="status-text">
+                            <h3>
+                                Status : <%=lands.land_status%>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="map">
                     </div>
                 </div>
-                <div class="map">
-                </div>
-            </div>
-            <div class="right">
-                <div class="info">
-                    <div class="info-content">
-                        <h3 class="info-des">
-                            Name : Something<br><br>
-                            Type : Something<br><br>
-                            Start Price : 3,XXX,XXX<br><br>
-                            Contact (Phone) : 09X-XXXXXXX<br><br>
-                        </h3>
+                <div class="right">
+                    <div class="info">
+                        <div class="info-content">
+                            <h3 class="info-des">
+                                Name : <%= lands.land_name %><br><br>
+                                Type : <%= lands.land_type %><br><br>
+                                Start Price : <%= lands.land_price %><br><br>
+                                Contact (Phone) : <%= lands.land_contanct %><br><br>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <div class="detail-content">
+                            <h3 class="descript">
+                                <%= lands.land_des %>
+                            </h3>
+                        </div>
                     </div>
                 </div>
-                <div class="detail">
-                    <div class="detail-content">
-                        <h3 class="descript">
-                            SomethingSomethingSomethingSomethingSomethingSomethingSomethingword-wrap: break-word;display: grid;
-                            justify-content: center;
-                            align-items: center;
-                        </h3>
-                    </div>
-                </div>
-            </div>
+            <% }%>
         </div>
     </div>
 </body>

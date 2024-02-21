@@ -52,7 +52,7 @@
                 </form>
             </div>
             <div class="up-right right-box">
-                <p><%= locals.customer_name %></p>
+                <p><%= locals.user_name %></p>
                 <img src="/images/circle-user.png" height="25px" width="25px" />
             </div>
         </div>
@@ -69,17 +69,21 @@
 
                 </div>
                 <div class="content-list">
-                    <% for(var i = 0;i< 2;i++) { %>
-                        <div class="card">
-                            <div class="card-details">
-                                <img src="/images/hgouse.jpg" width="100%">
-                                <p class="text-title">Big House</p>
-                                <p class="text-body">$1,100,000</p>
-                                <form action="/customer/addfav" method="post"><button class="buttoner"> Remove🌟
-                                </button></form>
+                    <% if (locals.lands){ %>
+                        <% lands.forEach((eachLand)=>{ %>
+                            <div class="card">
+                                <div class="card-details">
+                                    <img src="/images/<%= eachLand.land_image %>" width="100%">
+                                    <p class="text-title"><%= eachLand.land_name %></p>
+                                    <p class="text-body">$<%= eachLand.land_price %></p>
+                                    <form action="/customer/removefav" method="post">
+                                        <button class="buttoner" name="fav" value=<%= eachLand.land_id %>> Remove🌟
+                                        </button>
+                                    </form>
+                                </div>
+                                <form action="/items/<%= eachLand.land_id %>" method="get"><button class="card-button">More info</button></form>
                             </div>
-                            <form action="/items/id" method="get"><button class="card-button">More info</button></form>
-                        </div>
+                        <% }) %>
                     <% } %>
                 </div>
             </div>

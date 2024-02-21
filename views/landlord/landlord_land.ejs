@@ -35,7 +35,7 @@
         <div class="up-bar">
             <div class="up-left">
                 <img id="logo" src="/images/office.png" width="35px" height="35px" />
-                <form action="/" method="get" id="filter">
+                <form action="/land" method="get" id="filter">
                     <button type="submit" formaction="/landlord" id="home">Home</button>
                     <button style="font-weight: bolder;">Land for rent</button>
                     <!-- <button type="submit" formaction="/search" id="search">Search</button>
@@ -44,7 +44,7 @@
             </div>
             <div class="up-right right-box">
                 <p>
-                    <%= locals.customer_name %>
+                    <%= locals.user_name %>
                 </p>
                 <img src="/images/circle-user.png" height="25px" width="25px" />
             </div>
@@ -101,35 +101,27 @@
             <div class="content-main">
 
                 <div class="content-list">
-                    <% for(var i=0;i< 4;i++) { %>
-                        <div class="card">
-                            <div class="card-details">
-                                <img src="/images/hgouse.jpg" width="100%">
-                                <p class="text-title">Big House</p>
-                                <p class="text-body">$1,100,000</p>
+                    <% if (locals.lands){ %>
+                        <% lands.forEach((eachLand)=> {%>
+                            <div class="card">
+                                <div class="card-details">
+                                    <img src="/images/<%= eachLand.land_image %>" width="100%" height="100%">
+                                    <p class="text-title"><%= eachLand.land_name %></p>
+                                    <p class="text-body"><%= eachLand.land_price %></p>
+                                </div>
+                                <form action="/land/edit/<%= eachLand.land_id %>" method="get"><button class="card-button" name="land_id" value="<%= eachLand.land_id %>">Edit Land</button>
+                                </form>
+
+                                <%if (eachLand.land_status === "unavailable"){%>
+                                    <div class="status_NA">Unavailable</div>
+                                <%} else if (eachLand.land_status === "available"){%>
+                                    <div class="status_A">Available</div>
+                                <%}else{%>
+                                    <div class="status_NA">Sold out</div>
+                                <%}%>
+
                             </div>
-                            <form action="/land/create" method="get"><button class="card-button">Edit Land</button>
-                            </form>
-
-                            <div class="status_A">Available</div>
-
-
-                        </div>
-                    <% } %>
-                    <% for(var i=0;i< 2;i++) { %>
-                        <div class="card">
-                            <div class="card-details">
-                                <img src="/images/hgouse.jpg" width="100%">
-                                <p class="text-title">Big House</p>
-                                <p class="text-body">$1,100,000</p>
-                            </div>
-                            <form action="/land/create" method="get"><button class="card-button">Edit Land</button>
-                            </form>
-
-                            <div class="status_NA">Not Available</div>
-
-
-                        </div>
+                        <% }) %>
                     <% } %>
                 </div>
 
