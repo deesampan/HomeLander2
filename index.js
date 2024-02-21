@@ -222,7 +222,7 @@ app.post("/land/edit",async(req,res)=>{
     console.log(req.body);
     console.log("HI!");
 
-    await db.query("UPDATE land SET land_name = ($1), land_price = ($2), land_type = ($3), land_contanct = ($4), land_des = ($5), land_status = ($6) WHERE land_id = ($7)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,req.body.land_id]);
+    await db.query("UPDATE land SET land_name = ($1), land_price = ($2), land_type = ($3), land_contanct = ($4), land_des = ($5), land_status = ($6) WHERE land_id = ($7)",[req.body.land_name,req.body.land_price,req.body.status,req.body.land_phone,req.body.land_des,req.body.status,req.body.land_id]);
 
     res.redirect('/land');
 })
