@@ -262,6 +262,8 @@ img[id="house"]{
     gap: .5em;
     display: grid;
     place-content: center;
+
+    /* grid-template-rows: 50% 1fr 1fr; */
    }
    .card-details>img{
     border-radius: 20px;

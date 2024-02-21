@@ -151,7 +151,7 @@
                         <% lands.forEach((eachLand)=>{ %>
                             <div class="card">
                                 <div class="card-details">
-                                    <img src="/images/<%= eachLand.land_image %>" width="100%">
+                                    <img src="/images/<%= eachLand.land_image %>" width="100%" >
                                     <p class="text-title"><%= eachLand.land_name %></p>
                                     <p class="text-body">$<%= eachLand.land_price %></p>
                                     <form action="/customer/addfav" method="post">
