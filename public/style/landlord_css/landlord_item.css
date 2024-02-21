@@ -455,3 +455,28 @@ img{
     visibility: visible;
     transform: scale(100) translateX(2px);
   }
+
+.imageContainer{
+  width: 100%;
+  height: 100%;
+
+  /* background-color: #b5b5b5; */
+
+  display: grid;
+  grid-template-rows: 80% 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+#uploader{
+  width: 100x;
+  background: #dfb768;
+  color:#fff;
+  padding: 12px;
+  margin: 10px auto;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#input-file{
+  display: none;
+}

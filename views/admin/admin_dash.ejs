@@ -23,7 +23,7 @@
                 </form>
             </div>
             <div class="up-right right-box">
-                <p>admin_name</p>
+                <p><%=locals.user_name%></p>
                 <img src="/images/circle-user.png" height="25px" width="25px" />
             </div>
         </div>
@@ -77,14 +77,21 @@
                     <h2 id="h2">Land availability:</h2>
                 </div>
                 <table class="infoR">
-                    <tr>
-                        <td class="status available">Available</td>
-                        <td>-Michle</td>
-                    </tr>
-                    <tr>
-                        <td class="status unavailable">Unavailable</td>
-                        <td>-David</td>
-                    </tr>                    
+                    <% if(locals.land_ava){%>
+                        <% land_ava.forEach((eachland)=>{ %>
+                            <% if (eachland.land_status === "available"){%>
+                            <tr>
+                                <td class="status available">Available</td>
+                                <td>-<%= eachland.land_owner %></td>
+                            </tr>
+                            <%} else if (eachland.land_status === "unavailable"){ %>
+                                <tr>
+                                    <td class="status unavailable">Unavailable</td>
+                                    <td>-<%= eachland.land_owner %></td>
+                                </tr>
+                            <%}%>      
+                        <% }) %>            
+                    <%}%>  
                 </table>
             </div>
         </div>
@@ -126,7 +133,7 @@
         var data2 = {
             labels: ['Avaliable', 'Unavalible'],
             datasets: [{
-                data: [50, 50],
+                data: [<%= locals.ava %>, <%= locals.unava %>],
                 backgroundColor: ['green', 'red']
             }]
         };

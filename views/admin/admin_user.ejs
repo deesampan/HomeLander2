@@ -30,58 +30,44 @@
             <div class="landlordheading">Landlord</div>
             <div class="landlordside">
                 <table>
-                    <tr>
-                        <td>
-                            <form action="/admin/landlord/detail" method="get">
-                                <button class="test1">Michle</button>
-                            </form> 
-                            <button class="ban-button">Ban</button>
-                        </td>
-                        <td> <form action="/admin/Blacklist" method="get">
-                            <button class="blacklist-button">Blacklist</button>
-                        </form></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form action="/admin/landlord/detail" method="get">
-                                <button class="test1">David</button>
-                            </form> 
-                            <button class="ban-button">Ban</button>
-                        </td>
-                        <td> <form action="/admin/Blacklist" method="get">
-                            <button class="blacklist-button">Blacklist</button>
-                        </form></td>
-                    </tr>
+                    <% if(locals.landlords){ %>
+                        <% landlords.forEach((eachLandlord)=>{ %>
+                            <tr>
+                                <td>
+                                    <form action="/admin/user/detail" method="get">
+                                        <button class="test1"><%= eachLandlord.name %></button>
+                                    </form> 
+                                    <form action="/admin/ban/<%= eachLandlord.user_id%>" method="post">
+                                        <button class="ban-button">Ban</button></form>
+                                </td>
+                                <td> <form action="/admin/blacklist/<%= eachLandlord.user_id%>" method="post">
+                                    <button class="blacklist-button">Blacklist</button>
+                                </form></td>
+                            </tr>
+                        <%}) %>
+                    <%}%>
                 </table>
 
             </div>
             <div class="Userheading">User</div>
             <div class="Userside"> 
                 <table>
-                    <tr>
-                        <td>
-                            <form action="/admin/user/detail" method="get">
-                                <button class="test1">Shawn</button>
-                            </form> 
-                            <button class="ban-button">Ban</button>
-                        </td>
-                        <td> <form action="/admin/Blacklist" method="get">
-                            <button class="blacklist-button">Blacklist</button>
-                        </form></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form action="/admin/user/detail" method="get">
-                                <button class="test1">Connor</button>
-                            </form> 
-                        <button class="ban-button">Ban</button>
-                        </td>
-                        <td>
-                            <form action="/admin/Blacklist" method="get">
-                                <button class="blacklist-button">Blacklist</button>
-                            </form>
-                        </td>
-                    </tr>
+                    <% if(locals.users){ %>
+                        <%users.forEach((eachUser)=>{ %>
+                            <tr>
+                                <td>
+                                    <form action="/admin/user/detail" method="get">
+                                        <button class="test1"><%= eachUser.name %></button>
+                                    </form> 
+                                    <form action="/admin/ban/<%= eachUser.user_id%>" method="post">
+                                        <button class="ban-button">Ban</button></form>
+                                </td>
+                                <td> <form action="/admin/blacklist/<%= eachUser.user_id%>" method="post">
+                                    <button class="blacklist-button">Blacklist</button>
+                                </form></td>
+                            </tr>
+                        <%}) %>
+                    <%}%>
                 </table>
             </div>
         </div>

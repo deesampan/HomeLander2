@@ -166,11 +166,17 @@ form[id="filter"]>div>select{
    .card-details {
     color: black;
     height: 100%;
-    gap: .5em;
     display: grid;
     place-content: center;
+
+    grid-template-rows: 50% 1fr 1fr;
+
+    margin-bottom: -20px;
+
+    /* background-color: #625b56; */
    }
    .card-details>img{
+    object-fit: contain;
     border-radius: 20px;
    }
    
@@ -179,7 +185,7 @@ form[id="filter"]>div>select{
     width: 60%;
     border-radius: 1rem;
     border: none;
-    background-color: #BBAB8C;
+    /* background-color: #BBAB8C; */
     color: #fff;
     font-size: 1rem;
     padding: .5rem 1rem;
@@ -602,6 +608,8 @@ input[type="range"]::-webkit-slider-thumb {
 .footer>p{
     color:#d7c6ba;
 }
+
+
 
 button{
     cursor: pointer; 
