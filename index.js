@@ -46,7 +46,7 @@ app.use(express.static("public"));
 //login backend
 app.get("/",(req,res)=>{
     user_now = "name_of_user";
-    res.render("admin/admin_detail_landlord.ejs");
+    res.render("main_page.ejs");
 });
 
 app.get("/login",(req,res)=>{
@@ -256,6 +256,9 @@ app.get("/items/:id",async (req,res)=>{
 
     const data = await db.query("SELECT * FROM land WHERE land_id = ($1)",[temp_land_id]);
 
+    //adding view count
+    await db.query("INSERT INTO view_count (view_type, view_owner) VALUES ($1,$2)",[data.rows[0].land_type,user_now]);
+
     console.log(data.rows);
 
 
@@ -319,29 +322,40 @@ app.get("/admin",async (req,res)=>{
         const lands_status = await db.query("SELECT land_status, COUNT(land_status) FROM (SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord') GROUP BY land_status");
         console.log(lands_status.rows);
 
-        if(lands_status.rows.length === 0){
-            res.render("admin/admin_dash.ejs",{user_name:user_now});
-        }else if(lands_status.rows.length === 1){
-            console.log(lands_status.rows[0].land_status);
-            
-            if(lands_status.rows[0].land_status == "available"){
-                console.log("has only ava");
-                res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, ava:lands_status.rows[0].count});
-            }else{
-                console.log("has only unava");
-                res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, unava:lands_status.rows[0].count});
-            }
-        }
-        else{
-            const total_lands = parseInt(lands_status.rows[0].count) + parseInt(lands_status.rows[1].count);
 
-   
+        //check how many land available or unavailable
+        let land_ava = 0;
+        let land_unava = 0;
 
-            const land_unava = (parseInt(lands_status.rows[1].count) / total_lands) * 100;
-            const land_ava = (parseInt(lands_status.rows[0].count) / total_lands) * 100;
-    
-            res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, ava:land_ava,unava:land_unava});
+        if(lands_status.rows.find(({land_status})=> land_status === "available")){
+            land_ava = lands_status.rows.find(({land_status})=> land_status === "available").count;
+        }if(lands_status.rows.find(({land_status})=> land_status === "unavailable")){
+            land_unava = lands_status.rows.find(({land_status})=> land_status === "unavailable").count;
         }
+
+        const total_lands = land_ava + land_unava;
+
+
+        land_ava = (parseInt(land_ava) / total_lands) * 100;
+        land_unava = (parseInt(land_unava) / total_lands) * 100;
+
+        //check view count
+        const view_check = await db.query("SELECT view_type , COUNT(view_type) FROM view_count GROUP BY view_type;")
+        console.log(view_check.rows);
+
+        let view_sale = 0
+        let view_rent = 0;
+
+        if(view_check.rows.find(({view_type})=> view_type === "Sale")){
+            view_sale = view_check.rows.find(({view_type})=> view_type === "Sale").count;
+        }if(view_check.rows.find(({view_type})=> view_type === "Rent")){
+            view_rent = view_check.rows.find(({view_type})=> view_type === "Rent").count;
+        }
+
+        console.log(view_sale,view_rent);
+
+
+        res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, ava:land_ava,unava:land_unava,sale_count:view_sale,rent_count:view_rent});
 })
 
 app.get("/admin_land",async(req,res)=>{
@@ -396,7 +410,19 @@ app.get("/admin/user/detail/:id",async (req,res)=>{
     const fav_lands = await db.query("SELECT * FROM land INNER JOIN favorite ON (land.land_id = favorite.land_id) WHERE favorite.fav_owner = ($1)",[findUser.rows[0].name]);
     console.log(fav_lands.rows);
 
-    res.render("admin/admin_detail_user.ejs",{user_name:user_now,target:findUser.rows[0].name,lands:fav_lands.rows});
+    const view_user = await db.query("SELECT view_type,COUNT(view_type) FROM view_count WHERE view_owner = ($1) GROUP BY view_type",[findUser.rows[0].name]);
+    console.log(view_user.rows);
+
+    let view_sale = 0; let view_rent = 0;
+    if (view_user.rows.find(({view_type})=>view_type ==="Sale")){
+        view_sale = view_user.rows.find(({view_type})=>view_type ==="Sale").count;
+    }if (view_user.rows.find(({view_type})=>view_type ==="Rent")){
+        view_rent = view_user.rows.find(({view_type})=>view_type ==="Rent").count;
+    }
+
+    console.log(view_sale,view_rent);
+
+    res.render("admin/admin_detail_user.ejs",{user_name:user_now,target:findUser.rows[0].name,lands:fav_lands.rows,view_sale:view_sale,view_rent:view_rent});
 })
 
 app.get("/admin/edit/:id",async (req,res)=>{
@@ -483,5 +509,6 @@ async function deleteDatabaseFromName(name){
     await db.query("DELETE FROM land WHERE land_owner = ($1)",[name]);
     await db.query("DELETE FROM favorite WHERE fav_owner = ($1)",[name]);
     await db.query("DELETE FROM blacklist WHERE user_name = ($1)",[name]);
+    await db.query("DELETE FROM view_count WHERE view_owner = ($1)",[name]);
 }
 

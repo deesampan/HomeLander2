@@ -35,20 +35,12 @@
                 </div>
                 <table class="infoL">
                     <tr>
-                        <td>-Townhome</td>
-                        <td class="price">20</td>
+                        <td>-Sale</td>
+                        <td class="price"><%= locals.sale_count %></td>
                     </tr>
                     <tr>
-                        <td>-Tiny</td>
-                        <td class="price">12</td>
-                    </tr>
-                    <tr>
-                        <td>-Apartment</td>
-                        <td class="price">50</td>
-                    </tr>
-                    <tr>
-                        <td>-Big House</td>
-                        <td class="price">18</td>
+                        <td>-Rent</td>
+                        <td class="price"><%= locals.rent_count %></td>
                     </tr>
                 </table>
             </div>
@@ -105,10 +97,10 @@
     <script>
         // Data for the first pie chart (circle1)
         var data1 = {
-            labels: ['Townhome', 'Tiny', 'Apartment', 'Big House'],
+            labels: ['Sale', 'Rent'],
             datasets: [{
-                data: [20, 12, 50, 18],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                data: [<%= (locals.sale_count) ? locals.sale_count : 0%>, <%= (locals.rent_count) ? locals.rent_count : 0%>],
+                backgroundColor: ['#36A2EB', '#FFCE56']
             }]
         };
     
