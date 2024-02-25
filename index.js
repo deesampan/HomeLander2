@@ -46,7 +46,7 @@ app.use(express.static("public"));
 //login backend
 app.get("/",(req,res)=>{
     user_now = "name_of_user";
-    res.render("main_page.ejs");
+    res.render("admin/admin_detail_landlord.ejs");
 });
 
 app.get("/login",(req,res)=>{
@@ -361,6 +361,8 @@ app.get("/admin_user",async (req,res)=>{
     const users_data = await db.query("SELECT * FROM users WHERE role = 'customer'");
     const landlord_data = await db.query("SELECT * FROM users WHERE role = 'landlord'");
 
+    console.log(landlord_data.rows);
+
     res.render("admin/admin_user.ejs",{users:users_data.rows,landlords:landlord_data.rows,user_name:user_now});
 })
 
@@ -372,12 +374,29 @@ app.get("/admin/Blacklist",async (req,res)=>{
     res.render("admin/admin_blacklist.ejs",{users:user_data.rows, landlords:landlord_data.rows});
 })
 
-app.get("/admin/landlord/detail",(req,res)=>{
-    res.render("admin/admin_detail_landlord.ejs");
+app.get("/admin/landlord/detail/:id",async (req,res)=>{
+    console.log(req.params.id);
+
+    const findUser = await db.query("SELECT name FROM users WHERE user_id = $1",[req.params.id]);
+    console.log(findUser.rows);
+
+    const land_ava_data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE land_owner = $1 AND land_status = 'available'",[findUser.rows[0].name]);
+    const land_unava_data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE land_owner = $1 AND land_status = 'unavailable'",[findUser.rows[0].name]);
+    console.log(land_ava_data.rows);
+
+    res.render("admin/admin_detail_landlord.ejs",{user_name:user_now,target:findUser.rows[0].name,land_ava:land_ava_data.rows,land_unava:land_unava_data.rows});
 })
 
-app.get("/admin/user/detail",(req,res)=>{
-    res.render("admin/admin_detail_user.ejs");
+app.get("/admin/user/detail/:id",async (req,res)=>{
+    console.log(req.params.id);
+
+    const findUser = await db.query("SELECT name FROM users WHERE user_id = $1",[req.params.id]);
+    console.log(findUser.rows);
+
+    const fav_lands = await db.query("SELECT * FROM land INNER JOIN favorite ON (land.land_id = favorite.land_id) WHERE favorite.fav_owner = ($1)",[findUser.rows[0].name]);
+    console.log(fav_lands.rows);
+
+    res.render("admin/admin_detail_user.ejs",{user_name:user_now,target:findUser.rows[0].name,lands:fav_lands.rows});
 })
 
 app.get("/admin/edit/:id",async (req,res)=>{

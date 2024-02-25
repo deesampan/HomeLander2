@@ -11,7 +11,7 @@ body{
     display: grid;
     justify-items: center;
 
-    grid-template-rows: 10% 1fr;
+    grid-template-rows: 10% 8% 1fr;
 }
 
 /* Nav bar */
@@ -109,8 +109,11 @@ form[id="filter"]>div>select{
     justify-content: center;
     align-items: center; 
 
-    background-color: #EEE3CB;
-    border-radius: 25%;
+    /* background-color: #EEE3CB; */
+    border: 1px solid rgb(87, 87, 87);
+    border-radius: 20px;
+
+    font-size: 25px;
 }
 
 .name{
@@ -240,4 +243,19 @@ form[id="filter"]>div>select{
 
 button{
     cursor: pointer; 
+}
+
+.title{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+    justify-items: center;
+
+    grid-gap: 50px;
+}
+
+.goback{
+    border: 1px solid rgb(49, 49, 49);
+    border-radius: 20px;
 }
