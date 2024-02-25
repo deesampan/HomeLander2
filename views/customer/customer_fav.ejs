@@ -75,7 +75,7 @@
                                 <div class="card-details">
                                     <img src="/images/<%= eachLand.land_image %>" width="100%">
                                     <p class="text-title"><%= eachLand.land_name %></p>
-                                    <p class="text-body">$<%= eachLand.land_price %></p>
+                                    <p class="text-body">$<%= eachLand.land_price %> (<%= eachLand.land_type %>) - <%= eachLand.land_owner %></p>
                                     <form action="/customer/removefav" method="post">
                                         <button class="buttoner" name="fav" value=<%= eachLand.land_id %>> Remove🌟
                                         </button>

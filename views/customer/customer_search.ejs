@@ -65,18 +65,16 @@
                             <ul>
                             <li><a href="#">Type &dtrif;</a>
                                 <ul class="dropdown">
-                                <li><a href="#"><button type="submit">Townhome</button></a></li>
-                                <li><a href="#"><button type="submit">Tiny</button></a></li>
-                                <li><a href="#"><button type="submit">Apartment</button></a></li>
-                                <li><a href="#"><button type="submit">Big House</button></a></li>
+                                <li><a href="#"><button type="submit" name="type" value="Sale">Sale</button></a></li>
+                                <li><a href="#"><button type="submit" name="type" value="Rent">Rent</button></a></li>
                                 </ul>
                             </li>
                             </ul>
                         </nav>
                     </form>
                     <div onKeyPress="return enterFunction(event)">
-                        <form class="wave-group" action="/search-filter-name" method="get">
-                            <input required="" type="text" class="input">
+                        <form class="wave-group" action="/search-filter-name" method="post">
+                            <input required="" type="text" class="input" name="search_item">
                             <span class="bar"></span>
                             <label class="label">
                             <span class="label-char" style="--index: 0">S</span>
@@ -92,7 +90,7 @@
             </div>
             <div class="content-main">
                 <div class="search-filter-side">
-                    <form class="main" action="/filter-side" method="get"> 
+                    <form class="main" action="/filter-side" method="post"> 
                         <div class="gfg"> 
                             <p>Filter</p> 
                         </div> 
@@ -115,7 +113,7 @@
                                     <div class="price-field"> 
                                         <span>Max-Price</span> 
                                         <input type="number" 
-                                               class="max-input" 
+                                               class="max-input"
                                                value="1000000"> 
                                     </div> 
                                 </div> 
@@ -128,20 +126,22 @@
                             <!-- Slider -->
                             <div class="range-input"> 
                                 <input type="range" 
+                                        name="min_value"
                                        class="min-range" 
                                        min="0" 
                                        max="1000000" 
                                        value="0" 
                                        step="1"> 
                                 <input type="range" 
+                                        name="max_value"
                                        class="max-range" 
                                        min="0" 
                                        max="1000000" 
                                        value="1000000" 
-                                       step="1"> 
+                                       step="1" > 
                             </div> 
                         </div> 
-                        <button class="filter-but"> Filter
+                        <button class="filter-but" type="submit"> Filter
                         </button>
                     </form> 
 
@@ -153,7 +153,7 @@
                                 <div class="card-details">
                                     <img src="/images/<%= eachLand.land_image %>" width="100%" >
                                     <p class="text-title"><%= eachLand.land_name %></p>
-                                    <p class="text-body">$<%= eachLand.land_price %></p>
+                                    <p class="text-body">$<%= eachLand.land_price %> (<%= eachLand.land_type %>) - <%= eachLand.land_owner %></p>
                                     <form action="/customer/addfav" method="post">
                                         <button class="buttoner" name="fav" value=<%= eachLand.land_id %>> Add🌟
                                         </button>

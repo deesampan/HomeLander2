@@ -37,6 +37,7 @@ db.connect(); //for connecting database with your postgresql
 
 //checking which user is active now
 let user_now = "name_of_user";
+let role_now = "customer";
 
 
 // app.use(express.static(path.join(__dirname, 'public')))
@@ -83,10 +84,14 @@ app.post("/land/create",upload.single('upload'),async (req,res)=>{
     console.log(req.body.upload);
 
     console.log(req.file.originalname);
+
+    console.log(req.body.land_type);
     
     await db.query("INSERT INTO land (land_name,land_price,land_type,land_contanct,land_des,land_status,land_owner,land_image) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,user_now,req.file.originalname]);
     res.redirect("/land");
 })
+
+//login , regis menu
 
 app.post("/regis/customer/send",async (req,res)=>{
     const pass1 = req.body.password1;
@@ -122,6 +127,7 @@ app.post("/login/send",async (req,res)=>{
         const data = result.rows[0];
         if(data.password === password){
             user_now = data.name;
+            role_now = data.role;
             if(data.role === "customer"){
                 res.redirect("/home_customer");
             }else if (data.role === "landlord"){
@@ -142,6 +148,52 @@ app.post("/login/send",async (req,res)=>{
 });
 
 
+
+//filtering
+
+app.post("/search/filter",async(req,res)=>{
+    console.log(req.body);
+
+    const data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord' AND land_type = ($1)",[req.body.type]);
+
+    if(role_now === "customer"){
+        res.render("customer/customer_search.ejs",{customer_name: user_now,lands:data.rows});
+    }else if(role_now === "landlord"){
+        res.render("landlord/landlord_search.ejs",{user_name: user_now,lands:data.rows});
+    }else if(role_now==="admin"){
+        res.render("admin/admin_land.ejs",{customer_name: user_now,lands:data.rows});
+    }
+})
+
+app.post("/search-filter-name",async (req,res)=>{
+    console.log(req.body);
+
+    const data = await db.query(`SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord' AND LOWER(land_name) LIKE '%${(req.body.search_item).toLowerCase()}%'`);
+
+    if(role_now === "customer"){
+        res.render("customer/customer_search.ejs",{customer_name: user_now,lands:data.rows});
+    }else if(role_now === "landlord"){
+        res.render("landlord/landlord_search.ejs",{user_name: user_now,lands:data.rows});
+    }else if(role_now==="admin"){
+        res.render("admin/admin_land.ejs",{customer_name: user_now,lands:data.rows});
+    }
+});
+
+
+app.post("/filter-side",async (req,res)=>{
+    console.log(role_now);
+    console.log(req.body);
+
+    const data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord' AND land_price BETWEEN ($1) AND ($2)",[req.body.min_value,req.body.max_value]);
+
+    if(role_now === "customer"){
+        res.render("customer/customer_search.ejs",{customer_name: user_now,lands:data.rows});
+    }else if(role_now === "landlord"){
+        res.render("landlord/landlord_search.ejs",{user_name: user_now,lands:data.rows});
+    }else if(role_now==="admin"){
+        res.render("admin/admin_land.ejs",{user_name: user_now,lands:data.rows});
+    }
+})
 
 //customer
 
@@ -192,6 +244,8 @@ app.get("/home_customer",(req,res)=>{
 })
 
 app.get("/search",async (req,res)=>{
+    // console.log(req.body);
+
     const data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord'");
 
     res.render("customer/customer_search.ejs",{customer_name: user_now,lands:data.rows});
@@ -222,7 +276,7 @@ app.post("/land/edit",async(req,res)=>{
     console.log(req.body);
     console.log("HI!");
 
-    await db.query("UPDATE land SET land_name = ($1), land_price = ($2), land_type = ($3), land_contanct = ($4), land_des = ($5), land_status = ($6) WHERE land_id = ($7)",[req.body.land_name,req.body.land_price,req.body.status,req.body.land_phone,req.body.land_des,req.body.status,req.body.land_id]);
+    await db.query("UPDATE land SET land_name = ($1), land_price = ($2), land_type = ($3), land_contanct = ($4), land_des = ($5), land_status = ($6) WHERE land_id = ($7)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,req.body.land_id]);
 
     res.redirect('/land');
 })
@@ -236,40 +290,14 @@ app.get("/landlord/search",async(req,res)=>{
 
 
 
-
-
-app.get("/governor/dashboard",(req,res)=>{
-    res.render("governor/governor_dashboard.ejs");
-})
-app.get("/governor/audit",(req,res)=>{
-    res.render("governor/governor_audit_log.ejs");
-})
-
 app.listen(port,()=>{
     console.log("server is work!");
 });
 
 //admin
 app.get("/admin",async (req,res)=>{
-    try{
-        const data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord'");
-    
-        const lands_status = await db.query("SELECT land_status, COUNT(land_status) FROM (SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord') GROUP BY land_status");
-        console.log(lands_status.rows);
-
-        const total_lands = parseInt(lands_status.rows[0].count) + parseInt(lands_status.rows[1].count);
-
-   
-
-        const land_unava = (parseInt(lands_status.rows[1].count) / total_lands) * 100;
-        const land_ava = (parseInt(lands_status.rows[0].count) / total_lands) * 100;
-
-        res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, ava:land_ava,unava:land_unava});
-    }catch(err){
-        res.render("admin/admin_dash.ejs",{user_name:user_now});
-    }
-
-    // const data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord'");
+    // try{
+    //     const data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord'");
     
     //     const lands_status = await db.query("SELECT land_status, COUNT(land_status) FROM (SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord') GROUP BY land_status");
     //     console.log(lands_status.rows);
@@ -282,6 +310,38 @@ app.get("/admin",async (req,res)=>{
     //     const land_ava = (parseInt(lands_status.rows[0].count) / total_lands) * 100;
 
     //     res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, ava:land_ava,unava:land_unava});
+    // }catch(err){
+    //     res.render("admin/admin_dash.ejs",{user_name:user_now});
+    // }
+
+    const data = await db.query("SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord'");
+    
+        const lands_status = await db.query("SELECT land_status, COUNT(land_status) FROM (SELECT * FROM land INNER JOIN users ON (land.land_owner = users.name) WHERE users.role = 'landlord') GROUP BY land_status");
+        console.log(lands_status.rows);
+
+        if(lands_status.rows.length === 0){
+            res.render("admin/admin_dash.ejs",{user_name:user_now});
+        }else if(lands_status.rows.length === 1){
+            console.log(lands_status.rows[0].land_status);
+            
+            if(lands_status.rows[0].land_status == "available"){
+                console.log("has only ava");
+                res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, ava:lands_status.rows[0].count});
+            }else{
+                console.log("has only unava");
+                res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, unava:lands_status.rows[0].count});
+            }
+        }
+        else{
+            const total_lands = parseInt(lands_status.rows[0].count) + parseInt(lands_status.rows[1].count);
+
+   
+
+            const land_unava = (parseInt(lands_status.rows[1].count) / total_lands) * 100;
+            const land_ava = (parseInt(lands_status.rows[0].count) / total_lands) * 100;
+    
+            res.render("admin/admin_dash.ejs",{user_name:user_now,land_ava: data.rows, ava:land_ava,unava:land_unava});
+        }
 })
 
 app.get("/admin_land",async(req,res)=>{
@@ -290,10 +350,10 @@ app.get("/admin_land",async(req,res)=>{
 
         console.log(data.rows);
 
-        res.render("admin/admin_land.ejs",{lands:data.rows});
+        res.render("admin/admin_land.ejs",{lands:data.rows,user_name : user_now});
     }catch(err){
         console.log(err);
-        res.render("admin/admin_land.ejs");
+        res.render("admin/admin_land.ejs",{user_name:user_now});
     }
 })
 
@@ -301,7 +361,7 @@ app.get("/admin_user",async (req,res)=>{
     const users_data = await db.query("SELECT * FROM users WHERE role = 'customer'");
     const landlord_data = await db.query("SELECT * FROM users WHERE role = 'landlord'");
 
-    res.render("admin/admin_user.ejs",{users:users_data.rows,landlords:landlord_data.rows});
+    res.render("admin/admin_user.ejs",{users:users_data.rows,landlords:landlord_data.rows,user_name:user_now});
 })
 
 app.get("/admin/Blacklist",async (req,res)=>{
@@ -372,12 +432,15 @@ app.post("/admin/blacklist/:id",async(req,res)=>{
 
 
 //governor
-app.get("/Dashboard",(req,res)=>{
-    res.render("governor/governor_dashboard.ejs");
+app.get("/Dashboard",async (req,res)=>{
+    const data = await db.query("SELECT * FROM users WHERE role = 'customer'");
+    console.log(data.rows);
+
+    res.render("governor/governor_dashboard.ejs",{user_name: user_now,total_user:data.rows.length});
 })
 
 app.get("/governor/audit", (req,res)=>{
-    res.render("governor/governor_audit_log.ejs");
+    res.render("governor/governor_audit_log.ejs",{user_name:user_now});
 })
 
 
