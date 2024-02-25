@@ -420,6 +420,7 @@ app.post("/admin/blacklist/:id",async(req,res)=>{
     const blacklist_user = await db.query("SELECT user_name FROM blacklist WHERE user_name = ($1)",[find_user.rows[0].name]);
     if(blacklist_user.rows.length > 0){
         console.log("there're same name in blacklist");
+        res.redirect("/admin/Blacklist");
         return
     }else{
         console.log("added to blacklist");
@@ -427,6 +428,17 @@ app.post("/admin/blacklist/:id",async(req,res)=>{
     }
 
     res.redirect("/admin/Blacklist");
+})
+
+app.post("/admin/unblacklist/:id",async(req,res)=>{
+    console.log(req.params.id);
+
+    const find_user = await db.query("SELECT name FROM users WHERE user_id = ($1)",[req.params.id]);
+    console.log(find_user.rows[0].name);
+
+    await db.query("DELETE FROM blacklist WHERE user_name = ($1)",[find_user.rows[0].name]);
+
+    res.redirect("/admin_user");
 })
 
 

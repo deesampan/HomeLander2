@@ -1,17 +1,17 @@
 body{
-    background-color: gray;
+    background-color: white;
 }
 
 .main-div{
     width: 100%;
     height: 900px;
     
-    background-color: gray;
+    background-color: white;
 
     display: grid;
     justify-items: center;
 
-    grid-template-rows: 10% 1fr;
+    grid-template-rows: 10% 100px 1fr;
 }
 
 
@@ -234,4 +234,22 @@ tr:nth-child(even) {
 
 button{
     cursor: pointer; 
+}
+.title{
+    display: grid;
+
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+}
+.inline{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    justify-items: center;
+}
+
+.blacklist-button{
+    border: 0.5px solid rgb(44, 44, 44);
+
+    border-radius: 40px;
 }

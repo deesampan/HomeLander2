@@ -11,7 +11,7 @@ body{
     display: grid;
     justify-items: center;
 
-    grid-template-rows: 10% 1fr;
+    grid-template-rows: 10% 100px 1fr;
 }
 
 
@@ -158,15 +158,12 @@ form[id="filter"]>div>select{
     padding: 5px 10px; /* Adjust padding for better appearance */
 }
 
-.blacklist-button {
-    background-color: #6c757d;
-    border-radius: 25%;
-    color: white;
-    font-size: 14px;
-    border: 2px solid #343a40; /* Darker border color */
-    padding: 5px 10px; /* Adjust padding for better appearance */
-    margin-right: -9dvh; /* Add some space between buttons */
+.blacklist-button{
+    border: 0.5px solid rgb(44, 44, 44);
+
+    border-radius: 40px;
 }
+
 
 
 /* Adjust the button position to the end of the cell */
@@ -234,4 +231,20 @@ tr:nth-child(even) {
 
 button{
     cursor: pointer; 
+}
+.title{
+    display: grid;
+
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+}
+.inline{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    justify-items: center;
+}
+
+#blacklist{
+    margin-top: 0px;
 }
