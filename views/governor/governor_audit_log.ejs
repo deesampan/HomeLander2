@@ -38,27 +38,31 @@
                 <th colspan="2">Status</th>
             </tr>
             
-            <% for (var i = 0;i<2;i++){%>
-                <tr>
-                    <td>2023-12-17</td>
-                    <td>Selling</td>
-                    <td>B 3,000,000</td>
-                    <td style="text-align: center; vertical-align: middle;">
-                        <div class="container">
-                            <div class="tabs">
-                                <input type="radio" id="radio-1" name="status" value="available">
-                                <label class="tab" for="radio-1">Checked🟢</label>
-                                <input type="radio" id="radio-2" name="status" value="unavailable">
-                                <label class="tab" for="radio-2">In Progress🔴</label>
-                                <span class="glider"></span>
+            <% if(locals.lands){%>
+                <% lands.forEach((eachLand)=>{%>
+                    <tr>
+                        <td><%= eachLand.date %></td>
+                        <td><%= eachLand.land_type %></td>
+                        <td><%= eachLand.land_price %></td>
+                        <td style="text-align: center; vertical-align: middle;">
+                            <div class="container">
+                                <div class="tabs">
+                                    <%if(eachLand.checker === false){%>
+                                        <form action="/governor/check_true" method="post"><button type="submit" name="check" value="<%= eachLand.land_id %>"><img src="/images/cross.png" width="50px"></button></form>
+                                        <p>Uncheck</p>
+                                    <%} else {%>
+                                        <form action="/governor/check_false" method="post"><button type="submit" name="check" value="<%= eachLand.land_id %>"><img src="/images/tick.png" width="50px"></button></form>
+                                        <p>Check</p>
+                                    <%}%>
+                                </div>
+                                
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <form action="/governor/del_land/<%= eachLand.land_id %>" method="post"><button class="delete">delete</button></form>
+                                </td>
                             </div>
-                        </div>
-                            <td style="text-align: center; vertical-align: middle;">
-                                    <button class="delete">delete</button>
-                            </td>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                <%});%>
             <%}%>
            
         </table>

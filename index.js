@@ -85,9 +85,13 @@ app.post("/land/create",upload.single('upload'),async (req,res)=>{
 
     console.log(req.file.originalname);
 
-    console.log(req.body.land_type);
+    console.log(req.body.land_type); 
+
+    const d = new Date();
+    const date = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    console.log(date);
     
-    await db.query("INSERT INTO land (land_name,land_price,land_type,land_contanct,land_des,land_status,land_owner,land_image) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,user_now,req.file.originalname]);
+    await db.query("INSERT INTO land (land_name,land_price,land_type,land_contanct,land_des,land_status,land_owner,land_image,date,checker) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,user_now,req.file.originalname,date,false]);
     res.redirect("/land");
 })
 
@@ -99,7 +103,11 @@ app.post("/regis/customer/send",async (req,res)=>{
     
     
     if(pass1 == pass2){
-        await db.query("INSERT INTO customer (name,password) VALUES ($1,$2)",[req.body.username,pass1]);
+        const d = new Date();
+        const date = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+
+
+        await db.query("INSERT INTO customer (name,password,date) VALUES ($1,$2,$3)",[req.body.username,pass1,date]);
         res.redirect("/login");
     }else{
         res.redirect("/regis/customer");
@@ -123,7 +131,7 @@ app.post("/login/send",async (req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
     try{
-        const result = await db.query("SELECT * FROM (SELECT * FROM customer UNION SELECT * FROM landlord UNION SELECT * FROM governor UNION SELECT * FROM admin) WHERE name = ($1)",[username]);
+        const result = await db.query("SELECT * FROM (SELECT user_id,name,password FROM customer UNION SELECT * FROM landlord UNION SELECT * FROM governor UNION SELECT * FROM admin) WHERE name = ($1)",[username]);
 
         console.log(result.rows);
 
@@ -448,7 +456,7 @@ app.post("/admin/edit",async(req,res)=>{
 
 app.post("/admin/ban/:id",async (req,res)=>{
     console.log(req.params.id);
-    const data = await db.query("SELECT * FROM ((SELECT * FROM customer) UNION (SELECT * FROM landlord)) WHERE user_id = ($1)",[req.params.id]);
+    const data = await db.query("SELECT * FROM ((SELECT user_id,name,password FROM customer) UNION (SELECT * FROM landlord)) WHERE user_id = ($1)",[req.params.id]);
     const name = data.rows[0].name;
 
     deleteDatabaseFromName(name);
@@ -496,11 +504,59 @@ app.get("/Dashboard",async (req,res)=>{
     const data = await db.query("SELECT * FROM customer");
     console.log(data.rows);
 
-    res.render("governor/governor_dashboard.ejs",{user_name: user_now,total_user:data.rows.length});
+    const sale = await db.query("SELECT land_type,COUNT(land_type) FROM land WHERE land_type = 'Sale' GROUP BY land_type");
+    const rent = await db.query("SELECT land_type,COUNT(land_type) FROM land WHERE land_type = 'Rent' GROUP BY land_type");
+    const sold = await db.query("SELECT land_status,COUNT(land_status) FROM land WHERE land_status = 'soldout' GROUP BY land_status");
+    
+    let customer = {};
+    data.rows.forEach((each)=>{
+        customer.key = each.date;
+        customer.value = each.user_id;
+    });
+
+    console.log(customer);
+
+    // let dict = {};
+    // rows.forEach((row) => {
+    //     dict[row.date] = row.price;
+    // });
+
+    res.render("governor/governor_dashboard.ejs",{user_name: user_now,total_user:data.rows.length,sale:sale.rows[0].count,rent:rent.rows[0].count,sold:sold.rows[0].count});
 })
 
-app.get("/governor/audit", (req,res)=>{
-    res.render("governor/governor_audit_log.ejs",{user_name:user_now});
+app.get("/governor/audit", async (req,res)=>{
+    const data = await db.query("SELECT * FROM land INNER JOIN landlord ON (land.land_owner = landlord.name)");
+
+
+
+    res.render("governor/governor_audit_log.ejs",{user_name:user_now,lands:data.rows});
+})
+
+app.post("/governor/check_true",async (req,res)=>{
+    console.log(req.body);
+
+    await db.query("UPDATE land SET checker = true WHERE land_id = $1",[req.body.check]);
+
+    console.log("this is change to be true");
+    res.redirect("/governor/audit");
+})
+
+app.post("/governor/check_false",async (req,res)=>{
+    console.log(req.body);
+    
+    await db.query("UPDATE land SET checker = false WHERE land_id = $1",[req.body.check]);
+
+    console.log("this is change to be false")
+    res.redirect("/governor/audit");
+})
+
+app.post("/governor/del_land/:id",async(req,res)=>{
+    console.log(req.params.id);
+    
+    //deleting land
+    await db.query("DELETE FROM land WHERE land_id = $1",[req.params.id]);
+
+    res.redirect("/governor/audit");
 })
 
 
