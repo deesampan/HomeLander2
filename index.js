@@ -10,7 +10,7 @@ import 'dotenv/config';
 import multer from "multer";
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/UnityCopyFps/Photon-Multiplayer-FPS-Game-with-Unity--master/FPSMultiplayer/HomeLander2/public/images')
+      cb(null, '/WebDevelopmentProject/HomeLander2/public/images')
     },
     filename: function (req, file, cb) {
       
@@ -140,9 +140,10 @@ app.post("/login/send",async (req,res)=>{
             user_now = data.name;
             if((await db.query("SELECT * FROM customer WHERE name = ($1)",[username])).rows.length > 0){
                 res.redirect("/home_customer");
-                role_now = "customer"
+                role_now = "customer";
             }else if ((await db.query("SELECT * FROM landlord WHERE name = ($1)",[username])).rows.length > 0){
                 res.redirect("/landlord");
+                role_now = "landlord";
             }
             else if((await db.query("SELECT * FROM admin WHERE name = ($1)",[username])).rows.length > 0){
                 res.redirect("/admin");
@@ -164,6 +165,7 @@ app.post("/login/send",async (req,res)=>{
 
 app.post("/search/filter",async(req,res)=>{
     console.log(req.body);
+    console.log(role_now);
 
     const data = await db.query("SELECT * FROM land INNER JOIN landlord ON (land.land_owner = landlord.name) WHERE land_type = ($1)",[req.body.type]);
 
@@ -468,7 +470,7 @@ app.post("/admin/ban/:id",async (req,res)=>{
 app.post("/admin/blacklist/:id",async(req,res)=>{
     console.log(req.params.id);
 
-    const find_user = await db.query("SELECT * FROM ((SELECT * FROM customer) UNION (SELECT * FROM landlord)) WHERE user_id = ($1)",[req.params.id]);
+    const find_user = await db.query("SELECT * FROM ((SELECT user_id,name,password FROM customer) UNION (SELECT * FROM landlord)) WHERE user_id = ($1)",[req.params.id]);
 
 
     console.log(find_user);
@@ -489,7 +491,7 @@ app.post("/admin/blacklist/:id",async(req,res)=>{
 app.post("/admin/unblacklist/:id",async(req,res)=>{
     console.log(req.params.id);
 
-    const find_user = await db.query("SELECT * FROM ((SELECT * FROM customer) UNION (SELECT * FROM landlord)) WHERE user_id = ($1)",[req.params.id]);
+    const find_user = await db.query("SELECT * FROM ((SELECT user_id,name,password FROM customer) UNION (SELECT * FROM landlord)) WHERE user_id = ($1)",[req.params.id]);
     console.log(find_user.rows[0].name);
 
     await db.query("DELETE FROM blacklist WHERE user_name = ($1)",[find_user.rows[0].name]);
@@ -504,24 +506,30 @@ app.get("/Dashboard",async (req,res)=>{
     const data = await db.query("SELECT * FROM customer");
     console.log(data.rows);
 
-    const sale = await db.query("SELECT land_type,COUNT(land_type) FROM land WHERE land_type = 'Sale' GROUP BY land_type");
-    const rent = await db.query("SELECT land_type,COUNT(land_type) FROM land WHERE land_type = 'Rent' GROUP BY land_type");
-    const sold = await db.query("SELECT land_status,COUNT(land_status) FROM land WHERE land_status = 'soldout' GROUP BY land_status");
+    let sale = await db.query("SELECT land_type,COUNT(land_type) FROM land WHERE land_type = 'Sale' GROUP BY land_type");
+    let rent = await db.query("SELECT land_type,COUNT(land_type) FROM land WHERE land_type = 'Rent' GROUP BY land_type");
+    let sold = await db.query("SELECT land_status,COUNT(land_status) FROM land WHERE land_status = 'soldout' GROUP BY land_status");
     
+    if (sale.rows.length <= 0){sale=0}else{sale = sale.rows[0].count}
+    if (rent.rows.length <= 0){rent=0}else{rent = rent.rows[0].count}
+    if (sold.rows.length <= 0){sold=0}else{sold = sold.rows[0].count}
+
     let customer = {};
     data.rows.forEach((each)=>{
         customer.key = each.date;
         customer.value = each.user_id;
     });
 
-    console.log(customer);
+    console.log(sale.rows);
+    console.log(rent.rows);
+    console.log(sold.rows);
 
     // let dict = {};
     // rows.forEach((row) => {
     //     dict[row.date] = row.price;
     // });
 
-    res.render("governor/governor_dashboard.ejs",{user_name: user_now,total_user:data.rows.length,sale:sale.rows[0].count,rent:rent.rows[0].count,sold:sold.rows[0].count});
+    res.render("governor/governor_dashboard.ejs",{user_name: user_now,total_user:data.rows.length,sale,rent,sold});
 })
 
 app.get("/governor/audit", async (req,res)=>{
