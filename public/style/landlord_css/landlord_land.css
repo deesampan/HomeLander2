@@ -27,47 +27,73 @@ body {
   grid-gap: 20px;
 }
 
-.up-bar {
-  margin-top: 1.5%;
-  width: 70%;
-  height: 70%;
+.up-bar{
+  width: 65%;
+  height: 80%;
 
   background-color: #EEE3CB;
 
   border-radius: 50px;
 
   display: grid;
-  grid-template-columns: 30% 25%;
+  grid-template-columns:30% 25%;
   justify-content: space-between;
 }
 
-.up-right {
-
+.up-right{
   display: grid;
   justify-content: center;
   align-items: center;
 }
 
-.right-box {
+#pic{
+  display: grid;
+  justify-content: center;
+}
+
+.right-box{
   display: grid;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 30px 1fr;
 }
 
-.up-left {
+.user-name{
+  justify-content: center;
+  display: grid;
+}
+
+.logbut{
+  justify-content: end;
+  display: grid;
+}
+
+.logout{
+  color: white;
+  font-size: larger;
+
+  justify-content: center;
+  display: grid;
+  padding: 15px;
+  background: #ef4e4e;
+
+  margin-right: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 30px;
+}
+
+.up-left{
   display: grid;
   grid-template-columns: 1fr 2fr;
   justify-items: center;
   align-items: center;
 }
 
-h1,
-p,
-button {
+h1, p, button, h2{
   font-family: 'Open Sans', sans-serif;
   color: black;
-  font-weight: 500;
+  font-weight:500;
 }
 
 button {

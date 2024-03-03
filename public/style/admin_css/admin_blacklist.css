@@ -1,12 +1,12 @@
 body{
-    background-color: white;
+    background-color: #919191;
 }
 
 .main-div{
     width: 100%;
     height: 900px;
     
-    background-color: white;
+    background-color: #919191;
 
     display: grid;
     justify-items: center;
@@ -36,11 +36,41 @@ body{
     align-items: center;
 }
 
+#pic{
+    display: grid;
+    justify-content: center;
+}
+
 .right-box{
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 30px 1fr;
+}
+
+.user-name{
+    justify-content: center;
+    display: grid;
+}
+
+.logbut{
+    justify-content: end;
+    display: grid;
+}
+
+.logout{
+    color: white;
+    font-size: larger;
+
+    justify-content: center;
+    display: grid;
+    padding: 15px;
+    background: #ef4e4e;
+
+    margin-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 30px;
 }
 
 .up-left{
@@ -94,6 +124,14 @@ form[id="filter"]>div>select{
     grid-template-rows: 7% 1fr;
     margin-top: 3%;
     position: relative; 
+}
+
+.maintitile{
+    color: whitesmoke;
+}
+
+.goto{
+    color: whitesmoke;
 }
 
 /* Small line in the middle */
@@ -168,6 +206,13 @@ form[id="filter"]>div>select{
     margin-right: -9dvh; /* Add some space between buttons */
 }
 
+.blacklist-button{
+    border: 0.5px solid rgb(44, 44, 44);
+    background-color: #403f3f;
+    border-radius: 40px;
+    color: whitesmoke;
+}
+
 
 /* Adjust the button position to the end of the cell */
 .landlordside table td,
@@ -178,7 +223,15 @@ form[id="filter"]>div>select{
 .landlordside table td .ban-button,
 .Userside table td .ban-button {
     position: absolute;
-    right: 5dvh; /* Adjust the value as needed */
+    right: 8dvh; /* Adjust the value as needed */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.landlordside table td .blacklist-button,
+.Userside table td .blacklist-button {
+    position: absolute;
+    right: 0.5dvh; /* Adjust the value as needed */
     top: 50%;
     transform: translateY(-50%);
 }
@@ -195,10 +248,15 @@ td, th {
     text-align: left;
     padding: 8px;
     height: 4dvh;
+    border-bottom: 1px solid #dddddd;
+}
+
+tr:nth-child(odd) {
+    background-color: #ebebeb;
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #c2c2c2;
 }
 
 .landlordside table td button,
@@ -211,7 +269,6 @@ tr:nth-child(even) {
 .test2 {
     text-decoration: underline;
 }
-
 
 
 /* footer */

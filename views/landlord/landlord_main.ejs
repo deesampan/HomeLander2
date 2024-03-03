@@ -17,13 +17,16 @@
                 <form action="/" method="get" id="filter">
                     <button type="submit" formaction="/land" id="landlord">Landlord</button>
                     <img id="logo" src="/images/office.png" width="35px" height="35px"/>
-                    <button type="submit" formaction="/landlord" id="home">Home</button>
-                    <button type="submit" formaction="/landlord/search" id="search">Search</button>
+                    <button type="submit" formaction="/landlord" id="home"><b>Home</b></button>
+                    <button type="submit" formaction="/landlord/search" id="search"><p>Search</p></button>
                 </form>
             </div>
             <div class="up-right right-box">
-                <p><%= locals.user_name %></p>
-                <img src="/images/circle-user.png" height="25px" width="25px" />
+                <p class="user-name"><%= locals.user_name %></p>
+                <img src="/images/circle-user.png" height="25px" width="25px" id="pic"/>
+                <form action="/" method="get" class="logbut">
+                    <button type="submit" formaction="/" class="logout">logout</button>
+                </form>
             </div>
         </div>
         <div class="down-content">

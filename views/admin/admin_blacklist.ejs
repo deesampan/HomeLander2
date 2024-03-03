@@ -21,14 +21,17 @@
                 </form>
             </div>
             <div class="up-right right-box">
-                <p>admin_name</p>
-                <img src="/images/circle-user.png" height="25px" width="25px" />
+                <p class="user-name"><%= locals.user_name %></p>
+                <img src="/images/circle-user.png" height="25px" width="25px" id="pic"/>
+                <form action="/" method="get" class="logbut">
+                    <button type="submit" formaction="/" class="logout">logout</button>
+                </form>
             </div>
         </div>
 
         <div class="title">
-            <h1>☠Blacklist Accounts☠</h1>
-            <div class="inline"><p >Go to User Page</p>
+            <h1 class="maintitile">☠ Blacklist Accounts ☠</h1>
+            <div class="inline"><p class="goto">Go to User Page</p>
             <form action="/admin_user" method="get" style="float:left" id="blacklist">
                 <button class="blacklist-button">User Page</button>
             </form></div>

@@ -15,8 +15,7 @@ body{
 }
 
 .up-bar{
-    margin-top: 3%;
-    width: 70%;
+    width: 65%;
     height: 80%;
 
     background-color: #EEE3CB;
@@ -29,29 +28,56 @@ body{
 }
 
 .up-right{
-     
     display: grid;
     justify-content: center;
     align-items: center;
 }
-.right-box{
-    width: 80%;
 
+#pic{
     display: grid;
-    justify-items: flex-end;
+    justify-content: center;
+}
+
+.right-box{
+    display: grid;
+    justify-content: center;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 30px 1fr;
+}
+
+.user-name{
+    justify-content: center;
+    display: grid;
+}
+
+.logbut{
+    justify-content: end;
+    display: grid;
+}
+
+.logout{
+    color: white;
+    font-size: larger;
+
+    justify-content: center;
+    display: grid;
+    padding: 15px;
+    background: #ef4e4e;
+
+    margin-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 30px;
 }
 
 .up-left{
-    grid-auto-flow: column; 
     display: grid;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr;
     justify-items: center;
     align-items: center;
-    
 }
-h1, p, button{
+
+h1, p, button, h2{
     font-family: 'Open Sans', sans-serif;
     color: black;
     font-weight:500;

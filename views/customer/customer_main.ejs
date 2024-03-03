@@ -20,11 +20,12 @@
                     <button type="submit" formaction="/fav" id="about">Favorite</button>
                 </form>
             </div>
-            <div class="right-box">
-                
-                <p><%= locals.customer_name %><p>
-
-                <img src="/images/circle-user.png" height="25px" width="25px" />
+            <div class="up-right right-box">
+                <p class="user-name"><%= locals.user_name %></p>
+                <img src="/images/circle-user.png" height="25px" width="25px" id="pic"/>
+                <form action="/" method="get" class="logbut">
+                    <button type="submit" formaction="/" class="logout">logout</button>
+                </form>
             </div>
         </div>
         <div class="down-content">
