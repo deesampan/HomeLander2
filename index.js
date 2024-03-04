@@ -11,7 +11,7 @@ import multer from "multer";
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         //path to folder where it contains image
-        cb(null, '/WebDevelopmentProject/HomeLander2/public/images');
+        cb(null, '/UnityCopyFps/Photon-Multiplayer-FPS-Game-with-Unity--master/FPSMultiplayer/HomeLander2/public/images');
     },
     filename: function (req, file, cb) {
       
@@ -244,6 +244,12 @@ app.post("/land/create",upload.single('upload'),async (req,res)=>{
     console.log(date);
     
     await db.query("INSERT INTO land (land_name,land_price,land_type,land_contanct,land_des,land_status,land_owner,land_image,date,checker) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,user_now,req.file.originalname,date,false]);
+    res.redirect("/land");
+})
+
+app.post("/landlord/del",async(req,res)=>{
+    await db.query("DELETE FROM land WHERE land_id = $1",[req.body.del_land]);
+
     res.redirect("/land");
 })
 
