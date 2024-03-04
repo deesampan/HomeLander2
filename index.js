@@ -382,7 +382,7 @@ app.get("/admin_land",async(req,res)=>{
 })
 
 app.get("/admin_user",async (req,res)=>{
-    const users_data = await db.query("SELECT * FROM customer");
+    const users_data = await db.query("SELECT * FROM customer WHERE NOT EXIST (SELECT FROM blacklist WHERE name = blacklist.user_name)");
     const landlord_data = await db.query("SELECT * FROM landlord");
 
     console.log(landlord_data.rows);

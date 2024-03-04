@@ -15,22 +15,8 @@
 
 <body>
     <div class="main-div">
-        <div class="up-bar">
-            <div class="up-left">
-                <img id="logo" src="/images/office.png" width="35px" height="35px" />
-                <form action="/" method="get" id="filter">
-                    <button type="submit" formaction="/landlord" id="home">Home</button>
-                    <button type="submit" formaction="/search" id="search">Search</button>
-                    <button type="submit" formaction="/about" id="about">About</button>
-                </form>
-            </div>
-            <div class="up-right right-box">
-                <p class="user-name"><%= locals.user_name %></p>
-                <img src="/images/circle-user.png" height="25px" width="25px" id="pic"/>
-                <form action="/" method="get" class="logbut">
-                    <button type="submit" formaction="/" class="logout">logout</button>
-                </form>
-            </div>
+        <div >
+            
         </div>
         <form class="creator" action="/land/edit" method="post">
             <%if (locals.lands){%>
