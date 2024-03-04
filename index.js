@@ -382,8 +382,8 @@ app.get("/admin_land",async(req,res)=>{
 })
 
 app.get("/admin_user",async (req,res)=>{
-    const users_data = await db.query("SELECT * FROM customer WHERE NOT EXIST (SELECT FROM blacklist WHERE name = blacklist.user_name)");
-    const landlord_data = await db.query("SELECT * FROM landlord");
+    const users_data = await db.query("SELECT * FROM customer WHERE name NOT IN (SELECT DISTINCT user_name FROM blacklist)");
+    const landlord_data = await db.query("SELECT * FROM landlord WHERE name NOT IN (SELECT DISTINCT user_name FROM blacklist)");
 
     console.log(landlord_data.rows);
 
@@ -395,7 +395,7 @@ app.get("/admin/Blacklist",async (req,res)=>{
     const landlord_data = await db.query("SELECT * FROM blacklist INNER JOIN landlord ON (blacklist.user_name = landlord.name)");
 
 
-    res.render("admin/admin_blacklist.ejs",{users:user_data.rows, landlords:landlord_data.rows,user_name:user_name});
+    res.render("admin/admin_blacklist.ejs",{users:user_data.rows, landlords:landlord_data.rows,user_name:user_now});
 })
 
 app.get("/admin/landlord/detail/:id",async (req,res)=>{
