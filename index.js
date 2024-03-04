@@ -111,6 +111,7 @@ app.post("/login/send",async (req,res)=>{
             }
             else if((await db.query("SELECT * FROM admin WHERE name = ($1)",[username])).rows.length > 0){
                 res.redirect("/admin");
+                role_now = "admin";
             }else if((await db.query("SELECT * FROM governor WHERE name = ($1)",[username])).rows.length > 0){
                 res.redirect("/Dashboard");
             }
