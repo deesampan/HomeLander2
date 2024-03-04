@@ -567,6 +567,7 @@ app.post("/governor/del_land/:id",async(req,res)=>{
 
 
 //dangerous function
+//for deleting data row using name
 
 async function deleteDatabaseFromName(name){
     await db.query("DELETE FROM customer WHERE name = ($1)",[name]);
