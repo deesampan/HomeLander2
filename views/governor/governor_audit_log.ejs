@@ -12,7 +12,12 @@
             <a href="/Dashboard">Dashboard</a>
             <a class="active" href="/governor/audit">Audit logs</a>
             </div>
-            <div class="profile"><%= locals.user_name%>&nbsp;&nbsp;<img src="/images/circle-user.png" height="15px" width="15px" /></div>
+            <div class="profile">
+                <div class="user"><%= locals.user_name%>&nbsp;&nbsp;<img src="/images/circle-user.png" height="15px" width="15px" /></div>
+                <form action="/" method="get" class="logbut">
+                    <button type="submit" formaction="/" class="logout">logout</button>
+                </form>
+            </div>
         </div> 
         <!-- <div class="up-bar">
             <div class="up-left">
@@ -33,7 +38,7 @@
         <table>
             <tr>
                 <th>Date</th>
-                <th>Status</th>
+                <th>Types</th>
                 <th>Price</th>
                 <th colspan="2">Status</th>
             </tr>

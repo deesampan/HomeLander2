@@ -7,14 +7,19 @@
         <link rel="stylesheet" href="/style/governor/style_governor_dashboard.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     </head>
-    <div>
+    <body>
         <!-- <div class="main-div"> !-->
         <div class="topnav">
             <div>
             <a class="active" href="/Dashboard">Dashboard</a>
             <a href="/governor/audit">Audit logs</a>
             </div>
-            <div class="profile"><%= locals.user_name%>&nbsp;&nbsp;<img src="/images/circle-user.png" height="15px" width="15px" /></div>
+            <div class="profile">
+                <div class="user"><%= locals.user_name%>&nbsp;&nbsp;<img src="/images/circle-user.png" height="15px" width="15px" /></div>
+                <form action="/" method="get" class="logbut">
+                    <button type="submit" formaction="/" class="logout">logout</button>
+                </form>
+            </div>
         </div> 
             <!-- <div class="up-bar">
                 <div class="up-left">
@@ -29,10 +34,6 @@
                     <p>admin_name</p>
                     <img src="/images/circle-user.png" height="25px" width="25px" />
                 </div> -->
-            </div>
-            <div style="margin: 35px;"> 
-                <label>Date: <select><option selected>Daily</option></select></label>
-                <label>User types: <select><option selected>All</option></select></label>
             </div>
             <div class="grid_container" style="margin: 35px;">
                 <div class="transaction_graph">
