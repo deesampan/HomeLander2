@@ -45,7 +45,7 @@
                         <% landlords.forEach((eachLandlord)=>{ %>
                             <tr>
                                 <td>
-                                    <form action="/admin/user/detail" method="get">
+                                    <form action="/admin/landlord/detail/<%= eachLandlord.user_id%>" method="get">
                                         <button class="test1"><%= eachLandlord.name %></button>
                                     </form> 
                                     <form action="/admin/ban/<%= eachLandlord.user_id%>" method="post">
@@ -67,7 +67,7 @@
                         <%users.forEach((eachUser)=>{ %>
                             <tr>
                                 <td>
-                                    <form action="/admin/user/detail" method="get">
+                                    <form action="/admin/user/detail/<%= eachUser.user_id%>" method="get">
                                         <button class="test1"><%= eachUser.name %></button>
                                     </form> 
                                     <form action="/admin/ban/<%= eachUser.user_id%>" method="post">
