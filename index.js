@@ -395,7 +395,7 @@ app.get("/admin/Blacklist",async (req,res)=>{
     const landlord_data = await db.query("SELECT * FROM blacklist INNER JOIN landlord ON (blacklist.user_name = landlord.name)");
 
 
-    res.render("admin/admin_blacklist.ejs",{users:user_data.rows, landlords:landlord_data.rows});
+    res.render("admin/admin_blacklist.ejs",{users:user_data.rows, landlords:landlord_data.rows,user_name:user_name});
 })
 
 app.get("/admin/landlord/detail/:id",async (req,res)=>{
