@@ -11,7 +11,7 @@ import multer from "multer";
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         //path to folder where it contains image
-        cb(null, '/WebDevelopmentProject/HomeLander2/public/images');
+        cb(null, '/UnityCopyFps/Photon-Multiplayer-FPS-Game-with-Unity--master/FPSMultiplayer/HomeLander2/public/images');
     },
     filename: function (req, file, cb) {
       
@@ -111,6 +111,7 @@ app.post("/login/send",async (req,res)=>{
             }
             else if((await db.query("SELECT * FROM admin WHERE name = ($1)",[username])).rows.length > 0){
                 res.redirect("/admin");
+                role_now = "admin";
             }else if((await db.query("SELECT * FROM governor WHERE name = ($1)",[username])).rows.length > 0){
                 res.redirect("/Dashboard");
             }
@@ -243,6 +244,12 @@ app.post("/land/create",upload.single('upload'),async (req,res)=>{
     console.log(date);
     
     await db.query("INSERT INTO land (land_name,land_price,land_type,land_contanct,land_des,land_status,land_owner,land_image,date,checker) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,user_now,req.file.originalname,date,false]);
+    res.redirect("/land");
+})
+
+app.post("/landlord/del",async(req,res)=>{
+    await db.query("DELETE FROM land WHERE land_id = $1",[req.body.del_land]);
+
     res.redirect("/land");
 })
 
@@ -381,8 +388,8 @@ app.get("/admin_land",async(req,res)=>{
 })
 
 app.get("/admin_user",async (req,res)=>{
-    const users_data = await db.query("SELECT * FROM customer");
-    const landlord_data = await db.query("SELECT * FROM landlord");
+    const users_data = await db.query("SELECT * FROM customer WHERE name NOT IN (SELECT DISTINCT user_name FROM blacklist)");
+    const landlord_data = await db.query("SELECT * FROM landlord WHERE name NOT IN (SELECT DISTINCT user_name FROM blacklist)");
 
     console.log(landlord_data.rows);
 
@@ -394,7 +401,7 @@ app.get("/admin/Blacklist",async (req,res)=>{
     const landlord_data = await db.query("SELECT * FROM blacklist INNER JOIN landlord ON (blacklist.user_name = landlord.name)");
 
 
-    res.render("admin/admin_blacklist.ejs",{users:user_data.rows, landlords:landlord_data.rows});
+    res.render("admin/admin_blacklist.ejs",{users:user_data.rows, landlords:landlord_data.rows,user_name:user_now});
 })
 
 app.get("/admin/landlord/detail/:id",async (req,res)=>{
@@ -567,6 +574,7 @@ app.post("/governor/del_land/:id",async(req,res)=>{
 
 
 //dangerous function
+//for deleting data row using name
 
 async function deleteDatabaseFromName(name){
     await db.query("DELETE FROM customer WHERE name = ($1)",[name]);
