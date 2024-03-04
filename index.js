@@ -10,11 +10,12 @@ import 'dotenv/config';
 import multer from "multer";
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/UnityCopyFps/Photon-Multiplayer-FPS-Game-with-Unity--master/FPSMultiplayer/HomeLander2/public/images')
+        //path to folder where it contains image
+        cb(null, '/WebDevelopmentProject/HomeLander2/public/images');
     },
     filename: function (req, file, cb) {
       
-      cb(null, file.originalname);
+        cb(null, file.originalname);
     }
   })
 const upload = multer({storage});
@@ -40,10 +41,9 @@ let user_now = "name_of_user";
 let role_now = "customer";
 
 
-// app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static("public"));
 
-//login backend
+//login , register backend
 app.get("/",(req,res)=>{
     user_now = "name_of_user";
     res.render("main_page.ejs");
@@ -60,42 +60,6 @@ app.get("/regis/customer",(req,res)=>{
 app.get("/regis/landlord",(req,res)=>{
     res.render("regis_landlord.ejs");
 });
-
-
-//landlord
-
-app.get("/landlord",(req,res)=>{
-    res.render("landlord/landlord_main.ejs",{user_name : user_now});
-});
-
-app.get("/land",async (req,res)=>{
-    const data = await db.query("SELECT * FROM land WHERE land_owner = ($1)",[user_now]);
-    console.log(data.rows);
-
-    res.render("landlord/landlord_land.ejs",{user_name:user_now,lands:data.rows});
-});
-
-app.get("/land/create",(req,res)=>{
-    res.render("landlord/landlord_item.ejs",{user_name:user_now});
-});
-
-app.post("/land/create",upload.single('upload'),async (req,res)=>{
-    console.log(req.body);
-    console.log(req.body.upload);
-
-    console.log(req.file.originalname);
-
-    console.log(req.body.land_type); 
-
-    const d = new Date();
-    const date = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
-    console.log(date);
-    
-    await db.query("INSERT INTO land (land_name,land_price,land_type,land_contanct,land_des,land_status,land_owner,land_image,date,checker) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,user_now,req.file.originalname,date,false]);
-    res.redirect("/land");
-})
-
-//login , regis menu
 
 app.post("/regis/customer/send",async (req,res)=>{
     const pass1 = req.body.password1;
@@ -250,6 +214,38 @@ app.post("/land",(req,res)=>{
 
     res.render("landlord/landlord_land.ejs");
 })
+
+app.get("/landlord",(req,res)=>{
+    res.render("landlord/landlord_main.ejs",{user_name : user_now});
+});
+
+app.get("/land",async (req,res)=>{
+    const data = await db.query("SELECT * FROM land WHERE land_owner = ($1)",[user_now]);
+    console.log(data.rows);
+
+    res.render("landlord/landlord_land.ejs",{user_name:user_now,lands:data.rows});
+});
+
+app.get("/land/create",(req,res)=>{
+    res.render("landlord/landlord_item.ejs",{user_name:user_now});
+});
+
+app.post("/land/create",upload.single('upload'),async (req,res)=>{
+    console.log(req.body);
+    console.log(req.body.upload);
+
+    console.log(req.file.originalname);
+
+    console.log(req.body.land_type); 
+
+    const d = new Date();
+    const date = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    console.log(date);
+    
+    await db.query("INSERT INTO land (land_name,land_price,land_type,land_contanct,land_des,land_status,land_owner,land_image,date,checker) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",[req.body.land_name,req.body.land_price,req.body.land_type,req.body.land_phone,req.body.land_des,req.body.status,user_now,req.file.originalname,date,false]);
+    res.redirect("/land");
+})
+
 
 
 app.get("/home_customer",(req,res)=>{
