@@ -124,6 +124,11 @@ app.post("/login/send",async (req,res)=>{
     }
 });
 
+//about
+app.get("/about",(req,res)=>{
+    res.render("about.ejs");
+})
+
 
 
 //filtering
