@@ -10,7 +10,7 @@ import 'dotenv/config';
 import multer from "multer";
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/WebDevelopmentProject/HomeLander2/public/images')
+      cb(null, '/UnityCopyFps/Photon-Multiplayer-FPS-Game-with-Unity--master/FPSMultiplayer/HomeLander2/public/images')
     },
     filename: function (req, file, cb) {
       
@@ -253,7 +253,7 @@ app.post("/land",(req,res)=>{
 
 
 app.get("/home_customer",(req,res)=>{
-    res.render("customer/customer_main.ejs",{customer_name: user_now});
+    res.render("customer/customer_main.ejs",{user_name: user_now});
 })
 
 app.get("/search",async (req,res)=>{
@@ -457,8 +457,9 @@ app.post("/admin/edit",async(req,res)=>{
 })
 
 app.post("/admin/ban/:id",async (req,res)=>{
-    console.log(req.params.id);
-    const data = await db.query("SELECT * FROM ((SELECT user_id,name,password FROM customer) UNION (SELECT * FROM landlord)) WHERE user_id = ($1)",[req.params.id]);
+    console.log(req.body);
+    const data = await db.query("SELECT * FROM ((SELECT user_id,name,password FROM customer) UNION (SELECT * FROM landlord)) WHERE name = ($1)",[req.body.user_name]);
+    console.log(data.rows[0]);
     const name = data.rows[0].name;
 
     deleteDatabaseFromName(name);

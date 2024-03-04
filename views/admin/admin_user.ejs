@@ -45,11 +45,11 @@
                         <% landlords.forEach((eachLandlord)=>{ %>
                             <tr>
                                 <td>
-                                    <form action="/admin/landlord/detail/<%= eachLandlord.user_id %>" method="get">
+                                    <form action="/admin/landlord/detail/<%= eachLandlord.user_id%>" method="get">
                                         <button class="test1"><%= eachLandlord.name %></button>
-                                    </form> 
+                                    </form>
                                     <form action="/admin/ban/<%= eachLandlord.user_id%>" method="post">
-                                        <button class="ban-button">Ban</button></form>
+                                        <button name="user_name" class="ban-button" type="submit" value="<%= eachLandlord.name%>">Ban</button></form>
                                 </td>
                                 <td> <form action="/admin/blacklist/<%= eachLandlord.user_id%>" method="post">
                                     <button class="blacklist-button">Blacklist</button>
@@ -71,7 +71,7 @@
                                         <button class="test1"><%= eachUser.name %></button>
                                     </form>
                                     <form action="/admin/ban/<%= eachUser.user_id%>" method="post">
-                                        <button class="ban-button">Ban</button></form>
+                                        <button name="user_name" class="ban-button" type="submit" value="<%= eachUser.name%>">Ban</button></form>
                                 </td>
                                 <td> <form action="/admin/blacklist/<%= eachUser.user_id%>" method="post">
                                     <button class="blacklist-button">Blacklist</button>
